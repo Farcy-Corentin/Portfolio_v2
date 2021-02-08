@@ -22,7 +22,9 @@ class SkillFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name,
+            'categories' => $this->faker->text,
+            'skills' => implode(', ', $this->faker->words(3, false))
         ];
     }
 }

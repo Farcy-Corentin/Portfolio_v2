@@ -22,7 +22,17 @@ class ProjectFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->name,
+            'descriptions' => $this->faker->sentence(6, true),
+            'started_at' => $this->faker->date(),
+            'finished_at' => $this->faker->date(),
+            'missions' =>  $this->faker->sentence(6, true),
+            'languages' => $this->faker->sentence(6, true),
+            'software' => $this->faker->sentence(6, true),
+            'links' => 'https://www.google.com/',
+            'github_links' => 'https://github.com/Grezor',
+            'online' => $this->faker->boolean,
+            'pictures' => 'https://via.placeholder.com/150',
         ];
     }
 }

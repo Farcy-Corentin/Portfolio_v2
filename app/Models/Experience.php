@@ -23,5 +23,5 @@ class Experience extends Model
 {
     use HasFactory;
 
-    protected $table = 'Experiences';
+    protected $table = 'experiences';
 }

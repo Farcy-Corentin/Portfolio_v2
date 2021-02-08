@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Support\Str;
+use App\Models\Skill;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -15,10 +15,8 @@ class SkillSeeder extends Seeder
      */
     public function run()
     {
-        DB::$table('skills')->insert([
-            'name' => Str::random(10),
-            'categories' => Str::random(10),
-            'skills' => Str::random(10),
-        ]);
+        Skill::factory()
+            ->count(20)
+            ->create();
     }
 }

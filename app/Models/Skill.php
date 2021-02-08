@@ -4,6 +4,7 @@ namespace App\Models;
 
 use DateTime;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @property int $id
@@ -15,5 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Skill extends Model
 {
+    use HasFactory;
+
     protected $table = 'skills';
 }

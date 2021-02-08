@@ -22,7 +22,14 @@ class ExperienceFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->name,
+            'descriptions' => $this->faker->sentence(6, true),
+            'started_at' => $this->faker->date(),
+            'finished_at' => $this->faker->date(),
+            'missions' => $this->faker->sentence(6, true),
+            'languages' => implode(', ', $this->faker->words(3)),
+            'pictures' => 'https://via.placeholder.com/150',
+            'links' => 'https://www.google.com/',
         ];
     }
 }

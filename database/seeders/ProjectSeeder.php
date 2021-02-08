@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Project;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-class ProjectsSeeder extends Seeder
+class ProjectSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +15,8 @@ class ProjectsSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Project::factory()
+            ->count(20)
+            ->create();
     }
 }
