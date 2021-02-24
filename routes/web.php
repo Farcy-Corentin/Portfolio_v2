@@ -25,23 +25,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/skills', [SkillController::class , 'getIndex']);
+Route::get('/skills', [SkillController::class, 'getIndex']);
 
-Route::get('/trainings', function() {
+Route::get('/trainings', function () {
     return view('trainings');
 });
 
-Route::get('/projects', function() {
+Route::get('/projects', function () {
     return view('projects');
 });
 
-Route::get('/projects', [ProjectController::class , 'getProject']);
+Route::get('/projects', [ProjectController::class, 'getProject']);
 
-Route::get('/experiences', [ExperienceController::class , 'getExperience']);
+Route::get('/experiences', [ExperienceController::class, 'getExperience']);
 
-Route::get('/trainings', [TrainingController::class , 'getTraining']);
+Route::get('/trainings', [TrainingController::class, 'getTraining']);
 
-Route::get('/contact', function() {
+Route::get('/contact', function () {
     return view('contact');
 });
 
@@ -50,9 +50,12 @@ Route::get('/contact', function() {
  */
 Auth::routes();
 
-Route::resource('project', ProjectController::class);
 
-Route::prefix('admin')->name('admin.')->group(function(){
-     Route::resource('users', UsersController::class);
-     
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('users', UsersController::class);
+});
+
+Route::group(['middleware' => ['web']], function () {
+    Route::resource('project', ProjectController::class);
 });

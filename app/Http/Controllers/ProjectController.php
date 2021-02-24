@@ -12,7 +12,7 @@ class ProjectController extends Controller
         $projects = Project::all();
         return view('projects', compact('projects'));
     }
-    
+
     /**
      * Show the form for creating a new resource.
      * @return \Illuminate\Http\Response
@@ -31,7 +31,7 @@ class ProjectController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|max:255',
-            'descriptions' => 'required', 
+            'descriptions' => 'required',
             'started_at' =>  'required|date|date_format:Y-m-d',
             'finished_at' =>  'required|date|date_format:Y-m-d',
             'missions' => 'required',
@@ -42,7 +42,7 @@ class ProjectController extends Controller
             'online' => 'required',
             'pictures' => 'required',
         ]);
-        
+
         $project = new Project;
         $project->title = $request->title;
         $project->descriptions = $request->descriptions;
@@ -55,8 +55,11 @@ class ProjectController extends Controller
         $project->github_links = $request->github_links;
         $project->online = $request->online;
         $project->pictures = $request->pictures;
-        
+
         $project->save();
+
+        $request->session()->flash('success', 'Enregister');
+
         return redirect()->route('project.show', $project->id);
     }
 
@@ -68,7 +71,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view('project.show');
     }
 
     /**
@@ -104,5 +107,4 @@ class ProjectController extends Controller
     {
         //
     }
-
 }
