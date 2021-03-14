@@ -7,15 +7,9 @@ use Illuminate\Http\Request;
 
 class SkillController extends Controller
 {
-    public function getIndex()
+    public function getSkill()
     {
         $skills = Skill::all();
-        return view('skills', compact('skills'));
+        return view('admin.skills', compact('skills'));
     }
-
-    public function show()
-    {
-        
-    }
-
 }

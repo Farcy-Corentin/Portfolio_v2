@@ -7,7 +7,7 @@
         <div class="col-md-8 col-md-offset-2">
             <h1>Create New Project</h1>
             <hr>
-            {!! Form::open(['route' => 'project.store', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['route' => 'admin.project.store', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
                 {{ Form::label('title', 'Title:') }}
                 {{ Form::text('title', null, ['class' => 'form-control']) }}
 

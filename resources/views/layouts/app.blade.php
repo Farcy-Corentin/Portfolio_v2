@@ -17,6 +17,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f4478d3ebd.js" crossorigin="anonymous"></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -83,8 +84,8 @@
                                     {{ __('Logout') }}
                                 </a>
                                  <a class="dropdown-item" href="{{ route('admin.users.index') }}">Liste des utilisateurs</a>
-                                  <a class="dropdown-item" href="{{ route('project.create') }}">Create Project</a>
-
+                                 <a class="dropdown-item" href="{{ route('admin.project.create') }}">Create Project</a>
+                                 <a class="dropdown-item" href="{{ route('admin.skill.create') }}">Create Skill</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>

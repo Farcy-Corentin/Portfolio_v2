@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Skill;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,8 +16,9 @@ class SkillSeeder extends Seeder
      */
     public function run()
     {
-        Skill::factory()
-            ->count(20)
+        Category::factory()
+            ->count(4)
+            ->has(Skill::factory()->count(5), 'skills')
             ->create();
     }
 }

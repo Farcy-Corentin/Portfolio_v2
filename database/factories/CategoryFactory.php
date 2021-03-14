@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Skill;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class SkillFactory extends Factory
+class CategoryFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Skill::class;
+    protected $model = Category::class;
 
     /**
      * Define the model's default state.
@@ -22,8 +22,7 @@ class SkillFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
-            'skills' => implode(', ', $this->faker->words(3, false))
+            'name' => $this->faker->name
         ];
     }
 }
