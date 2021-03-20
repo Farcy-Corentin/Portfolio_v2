@@ -10,6 +10,6 @@ class SkillController extends Controller
     public function getSkill()
     {
         $skills = Skill::all();
-        return view('admin.skills', compact('skills'));
+        return view('skills', compact('skills'));
     }
 }

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
 
 class ProjectController extends Controller
 {
@@ -38,7 +39,7 @@ class ProjectController extends Controller
             'pictures' => 'required',
         ]);
 
-        $project = new Project;
+        $project = new Project();
         $project->title = $request->title;
         $project->descriptions = $request->descriptions;
         $project->started_at = $request->started_at;
@@ -59,10 +60,10 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Project $project
+     * @param  \App\Models\Project $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show(Project $id)
     {
         return view('admin.project.show');
     }

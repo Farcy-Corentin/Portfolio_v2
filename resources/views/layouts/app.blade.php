@@ -46,10 +46,13 @@
                             <a class="nav-link" href="/skills">Skills</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/experiences">experiences</a>
+                            <a class="nav-link" href="/experiences">Experiences</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/projects">Projects</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Trainings">Trainings</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/contact">Contact</a>
@@ -86,7 +89,8 @@
                                  <a class="dropdown-item" href="{{ route('admin.users.index') }}">Liste des utilisateurs</a>
                                  <a class="dropdown-item" href="{{ route('admin.project.create') }}">Create Project</a>
                                  <a class="dropdown-item" href="{{ route('admin.skill.create') }}">Create Skill</a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                 <a class="dropdown-item" href="{{ route('admin.experience.create') }}">Create Experience</a>
+                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
                             </div>

@@ -45,7 +45,6 @@ class SkillController extends Controller
         $skill->category_id = (int) $validated['category'];
         $skill->skills = $validated['skills'];
 
-
         $skill->save();
         $request->session()->flash('success', 'Enregister');
         return redirect()->route('admin.skill.show', $skill->id);
@@ -53,7 +52,6 @@ class SkillController extends Controller
 
     /**
      * Display the specified resource.
-     *
      * @param  \App\Models\Skill $skill
      * @return \Illuminate\Http\Response
      */
