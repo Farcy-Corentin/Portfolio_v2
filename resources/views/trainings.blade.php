@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    experiences
+
     @foreach($trainings as $training)
         <h3>{{ $training->id }} === {{ $training->title }}</h3>
         <p>{{ $training->description }}</p>

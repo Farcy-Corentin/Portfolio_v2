@@ -6,7 +6,6 @@ use App\Models\Project;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-
 class ProjectController extends Controller
 {
     /**
@@ -25,7 +24,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $validated = $this->validate($request, [
             'title' => 'required|max:255',
             'descriptions' => 'required',
             'started_at' =>  'required|date|date_format:Y-m-d',
@@ -40,17 +39,17 @@ class ProjectController extends Controller
         ]);
 
         $project = new Project();
-        $project->title = $request->title;
-        $project->descriptions = $request->descriptions;
-        $project->started_at = $request->started_at;
-        $project->finished_at = $request->finished_at;
-        $project->missions = $request->missions;
-        $project->languages = $request->languages;
-        $project->software = $request->software;
-        $project->links = $request->links;
-        $project->github_links = $request->github_links;
-        $project->online = $request->online;
-        $project->pictures = $request->pictures;
+        $project->title = $validated['title'];
+        $project->descriptions = $validated['descriptions'];
+        $project->started_at = $validated['started_at'];
+        $project->finished_at = $validated['finished_at'];
+        $project->missions = $validated['missions'];
+        $project->languages = $validated['languages'];
+        $project->software = $validated['software'];
+        $project->links = $validated['links'];
+        $project->github_links = $validated['github_links'];
+        $project->online = $validated['online'];
+        $project->pictures = $validated['pictures'];
 
         $project->save();
         $request->session()->flash('success', 'Enregister');
@@ -58,8 +57,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
+     * Visualiser dans l'admin
      * @param  \App\Models\Project $id
      * @return \Illuminate\Http\Response
      */
@@ -69,8 +67,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
+     * Editer un Projet
      * @param  \App\Models\Project $project
      * @return \Illuminate\Http\Response
      */
@@ -80,20 +77,17 @@ class ProjectController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
+     * Mettre a jour un projet
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Project $project
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Project $project)
     {
-        //
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
+     * Supprimer un projet
      * @param  \App\Models\Project $project
      * @return \Illuminate\Http\Response
      */

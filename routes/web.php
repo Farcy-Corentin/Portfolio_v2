@@ -16,9 +16,9 @@ Route::get('/', function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/skills', [SkillController::class, 'getSkill']);
 
-Route::get('/trainings', function () {
-    return view('trainings');
-});
+// Route::get('/trainings', function () {
+//     return view('trainings');
+// });
 
 Route::get('/projects', [ProjectController::class, 'getProject']);
 

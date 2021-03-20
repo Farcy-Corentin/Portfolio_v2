@@ -12,7 +12,9 @@ use Illuminate\Contracts\View\View;
 
 class SkillController extends Controller
 {
-
+    /**
+     * 
+     */
     public function index(): Factory|View
     {
         return view('admin.skill.index', [
@@ -59,7 +61,10 @@ class SkillController extends Controller
     {
         return view('admin.skill.show');
     }
-
+    /**
+     * Selectionne toutes les catégories prèsente en BDD
+     * @return \Illuminate\Support\Collection
+     */
     private function selectCategorie(): Collection
     {
         return Category::all()->pluck('name', 'id');
