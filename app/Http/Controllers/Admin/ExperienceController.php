@@ -18,6 +18,12 @@ class ExperienceController extends Controller
         return view('admin.experience.create');
     }
 
+    public function index()
+    {
+        $experiences = Experience::all();
+        return view('admin.experience.index', compact('experiences'));
+    }
+
     /**
      * Validation du formulaire
      * @param  \Illuminate\Http\Request $request
@@ -59,5 +65,39 @@ class ExperienceController extends Controller
     public function show(Experience $experience)
     {
         return view('admin.experience.show')->with('experience', $experience);
+    }
+
+    public function edit($id)
+    {
+        $experience = Experience::find($id);
+        return view('admin.experience.edit')->with('experience', $experience);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'title' => 'required',
+            'descriptions' => 'required',
+            'started_at' => 'required',
+            'finished_at' => 'required',
+            'missions' => 'required',
+            'languages' => 'required',
+            'pictures' => 'required',
+            'links' => 'required'
+        ]);
+
+        $experience = Experience::find($id);
+        $experience->title = $request->input('title');
+        $experience->descriptions = $request->input('descriptions');
+        $experience->started_at = $request->input('started_at');
+        $experience->finished_at = $request->input('finished_at');
+        $experience->missions = $request->input('missions');
+        $experience->languages = $request->input('languages');
+        $experience->pictures = $request->input('pictures');
+        $experience->links = $request->input('links');
+
+        $experience->save();
+        $request->session()->flash('success', 'Enregister');
+        return redirect()->route('admin.experience.show', $experience->id);
     }
 }

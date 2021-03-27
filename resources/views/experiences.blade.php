@@ -3,7 +3,7 @@
     experiences
     @foreach($experiences as $experience)
         <h3>{{ $experience->title }}</h3>
-        <p>{{ $experience->description }}</p>
+        <p>{{ $experience->descriptions }}</p>
         <p>{{ $experience->started_at }}</p>
         <p>{{ $experience->finished_at }}</p>
         <p>{{ $experience->missions }}</p>
