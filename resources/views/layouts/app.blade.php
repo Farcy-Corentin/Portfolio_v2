@@ -90,8 +90,13 @@
                                  <a class="dropdown-item" href="{{ route('admin.project.create') }}">Create Project</a>
                                  <a class="dropdown-item" href="{{ route('admin.skill.create') }}">Create Skill</a>
                                  <a class="dropdown-item" href="{{ route('admin.experience.create') }}">Create Experience</a>
-                                 <a class="dropdown-item" href="{{ route('admin.experience.index') }}">All Experiences</a>
-                                 <br>
+                                 
+                                <hr>
+                                <a class="dropdown-item" href="{{ route('admin.experience.index') }}">All Experiences</a>
+                                <a class="dropdown-item" href="{{ route('admin.project.index') }}">All Projects</a>
+                                <a class="dropdown-item" href="{{ route('admin.skill.index') }}">All Skills</a>
+                                <a class="dropdown-item" href="{{ route('admin.training.index') }}">All Trainings</a>
+                                <hr>
                                  <a class="dropdown-item" href="{{ route('admin.training.create') }}">Create Trainings</a>
                                  
                                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

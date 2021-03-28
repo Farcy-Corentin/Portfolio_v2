@@ -1,8 +1,53 @@
 @extends('layouts.app')
-@section('title', '| View Project')
+@section('title', '| View Project') 
 
-@section('content')
+@section('content') 
 
-<p class="lead">This is the portfolio Post</p>
+    <h1>Show Project {{ $project->id }}</h1>
 
+
+    <div class="row">
+        <div class="col-md-8">
+    
+        <p>{{ $project->title }}</p>
+        <p>{{ $project->descriptions }}</p>
+        <p>{{ $project->started_at }}</p>
+        <p>{{ $project->finished_at }}</p>
+        <p>{{ $project->missions }}</p>
+        <p>{{ $project->languages }}</p>
+        <p>{{ $project->software }}</p>
+        <p>{{ $project->links }}</p>
+        <p>{{ $project->github_links }}</p>
+        <p>{{ $project->online }}</p>
+        <p>{{ $project->pictures }}</p>
+
+        </div>
+
+        <div class="col-md-4">
+            <div class="well">
+                <dl class="dl-horizontal">
+                    <dt>Created At:</dt>
+                    <dd><p>{{ $project->created_at }}</p></dd>
+                </dl>
+
+                <dl class="dl-horizontal">
+                    <dt>Updated At:</dt>
+                    <dd><p>{{ $project->updated_at }}</p></dd>
+                </dl>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <button href="admin.project.edit" type="button" class="btn btn-success">Edit </button>
+                    </div>
+
+                     <div class="col-sm-6">
+                         
+                        {!! Form::open(['route' => ['admin.project.destroy', $project->id], 'method' => 'DELETE']) !!}
+                        {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block']) !!}
+                        {!! Form::close() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

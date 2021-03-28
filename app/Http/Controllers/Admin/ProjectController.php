@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+    public function index()
+    {
+        $project = Project::all();
+        return view('admin.project.index', compact('project'));
+    }
+
     /**
      * Show the form for creating a new resource.
      * @return \Illuminate\Http\Response
@@ -58,12 +64,12 @@ class ProjectController extends Controller
 
     /**
      * Visualiser dans l'admin
-     * @param  \App\Models\Project $id
+     * @param  \App\Models\Project $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $id)
+    public function show(Project $project)
     {
-        return view('admin.project.show');
+        return view('admin.project.show')->with('project', $project);
     }
 
     /**
@@ -73,7 +79,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        $project = Project::find($project);
+        return view('admin.project.edit')->with('project', $project);
     }
 
     /**
@@ -82,8 +89,21 @@ class ProjectController extends Controller
      * @param  \App\Models\Project $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'title' => 'required',
+            'descriptions' => 'required',
+            'started_at' => 'required',
+            'finished_at' => 'required',
+            'missions' => 'required',
+            'languages' => 'required',
+            'software' => 'required',
+            'links' => 'required',
+            'github_links' => 'required',
+            'online' => 'required',
+            'pictures' => 'required'
+        ]);
     }
 
     /**
