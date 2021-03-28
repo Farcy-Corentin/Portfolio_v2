@@ -72,7 +72,10 @@ class ExperienceController extends Controller
         $experience = Experience::find($id);
         return view('admin.experience.edit')->with('experience', $experience);
     }
-
+    /**
+     * Update experience 
+     * @param Request $request
+     */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -99,5 +102,18 @@ class ExperienceController extends Controller
         $experience->save();
         $request->session()->flash('success', 'Enregister');
         return redirect()->route('admin.experience.show', $experience->id);
+    }
+
+    /**
+     * Delete expérience
+     * @param Request $request 
+     * @param $id : l'id de l'experience
+     */
+    public function destroy(Request $request, $id)
+    {
+        $experience = Experience::find($id);
+        $experience->delete();
+        $request->session()->flash('success', 'l\'expériences ' . $id . 'a bien été supprimer avec succès');
+        return redirect()->route('admin.experience.index', $experience->id);
     }
 }

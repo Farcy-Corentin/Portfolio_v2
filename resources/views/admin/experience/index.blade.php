@@ -7,14 +7,13 @@
             All Expériences
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-4 mb-5">
             <a href="{{ route('admin.experience.create') }}" class="btn btn-block btn-primary">Create New Expérience</a>
         </div>
         <br>
         <hr>
         <br>
            <div class="col-md-12">
-             
               <table class="table table-hover">
                 <thead>
                     <th>#</th>

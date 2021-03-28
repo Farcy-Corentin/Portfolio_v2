@@ -38,7 +38,10 @@
                     </div>
 
                      <div class="col-sm-6">
-                        <button type="button" class="btn btn-danger">Delete <i class="fas fa-trash"></i></button>
+                         
+                        {!! Form::open(['route' => ['admin.experience.destroy', $experience->id], 'method' => 'DELETE']) !!}
+                        {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block']) !!}
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>
