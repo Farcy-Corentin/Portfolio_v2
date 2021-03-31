@@ -45,7 +45,8 @@
                     [
                         'class' => 'btn btn-success btn-lg btn-black',
                         'style' => 'margin-top: 20px;'
-                    ])}}
+                    ]
+                )}}
             {!! Form::close() !!}
         </div>
     </div>

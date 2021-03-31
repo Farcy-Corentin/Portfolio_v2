@@ -34,11 +34,10 @@
                 <hr>
                 <div class="row">
                     <div class="col-sm-6">
-                        <button href="admin.experience.edit" type="button" class="btn btn-success">Edit </button>
+                        <a href="{{ route('admin.experience.edit', $experience->id) }}" class="btn btn-outline-success">edit</a></th>
                     </div>
 
                      <div class="col-sm-6">
-                         
                         {!! Form::open(['route' => ['admin.experience.destroy', $experience->id], 'method' => 'DELETE']) !!}
                         {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block']) !!}
                         {!! Form::close() !!}

@@ -37,7 +37,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-sm-6">
-                        <button href="admin.project.edit" type="button" class="btn btn-success">Edit </button>
+                       <a href="{{ route('admin.project.edit', $project->id) }}" class="btn btn-outline-success">edit</a></th>
                     </div>
 
                      <div class="col-sm-6">

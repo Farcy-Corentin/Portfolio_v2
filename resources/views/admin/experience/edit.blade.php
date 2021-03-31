@@ -43,7 +43,7 @@
                 </dl>
 
                 <dl class="dl-horizontal">
-                    <dt>Updated At:</dt>
+                    <dt>Updated At :</dt>
                     <dd><p>{{ $experience->updated_at }}</p></dd>
                 </dl>
                 <hr>

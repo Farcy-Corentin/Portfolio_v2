@@ -58,7 +58,6 @@ class ExperienceController extends Controller
     }
 
     /**
-     * See the experiences when sending the form
      * @param  \App\Models\Experience $experience
      * @return \Illuminate\Http\Response
      */

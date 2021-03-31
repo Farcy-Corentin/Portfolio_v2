@@ -77,9 +77,9 @@ class ProjectController extends Controller
      * @param  \App\Models\Project $project
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit($id)
     {
-        $project = Project::find($project);
+        $project = Project::find($id);
         return view('admin.project.edit')->with('project', $project);
     }
 
@@ -101,9 +101,26 @@ class ProjectController extends Controller
             'software' => 'required',
             'links' => 'required',
             'github_links' => 'required',
-            'online' => 'required',
+            'online' => 'boolean',
             'pictures' => 'required'
         ]);
+
+        $project = Project::find($id);
+        $project->title = $request->input('title');
+        $project->descriptions = $request->input('descriptions');
+        $project->started_at = $request->input('started_at');
+        $project->finished_at = $request->input('finished_at');
+        $project->missions = $request->input('missions');
+        $project->languages = $request->input('languages');
+        $project->software = $request->input('software');
+        $project->links = $request->input('links');
+        $project->github_links = $request->input('github_links');
+        $project->online = $request->input('online');
+        $project->pictures = $request->input('pictures');
+
+        $project->save();
+        $request->session()->flash('success', 'Enregister');
+        return redirect()->route('admin.project.show', $project->id);
     }
 
     /**
@@ -111,8 +128,11 @@ class ProjectController extends Controller
      * @param  \App\Models\Project $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
+    public function destroy(Request $request, $id)
     {
-        //
+        $project = Project::find($id);
+        $project->delete();
+        $request->session()->flash('success', 'Le projet ' . $id . ' a bien etais suprpimer');
+        return redirect()->route('admin.project.index', $project->id);
     }
 }
