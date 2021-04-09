@@ -25,7 +25,7 @@
                 </thead>
 
                  <tbody>
-                    @foreach($project as $project)
+                    @foreach($projects as $project)
                     <tr>
                         <th>{{$project->id}}</th>
                         <th>{{$project->title}}</th>
@@ -44,6 +44,9 @@
                     @endforeach
                  </tbody>
               </table>
+                <div class="text-center">
+				    {!! $projects->links('pagination::bootstrap-4'); !!}
+			    </div>
         </div>
     </div>
 @endsection

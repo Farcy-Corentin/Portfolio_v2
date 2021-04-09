@@ -3,8 +3,8 @@
 
 @section('content') 
     <div class="row">
-        <div class="col-md-10">
-            All training
+        <div class="col-md-10 mb-5">
+           <h2> All trainings <span class="badge badge-pill badge-primary">{{ $training->count() }}</span></h2>
         </div>
 
         <div class="col-md-2">
@@ -25,8 +25,11 @@
                 </thead>
 
                  <tbody>
+
                     @foreach($training as $training)
+                   
                     <tr>
+                        
                         <th>{{ $training->id }}</th>
                         <th>{{ $training->title }}</th>
                         <th>{{ substr($training->description, 0, 50 ) }}</th>
