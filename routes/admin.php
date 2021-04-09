@@ -12,6 +12,6 @@ use Illuminate\Support\Facades\Route;
 Route::resource('experience', ExperienceController::class);
 Route::resource('users', UsersController::class);
 Route::resource('project', ProjectController::class);
-Route::resource('skill', SkillController::class);
-Route::resource('training', TrainingController::class);
+Route::resource('skill', SkillController::class); // Compétences
+Route::resource('training', TrainingController::class); // Formations
 // Route::get('/experiences', [ExperienceController::class, 'getExperience']);

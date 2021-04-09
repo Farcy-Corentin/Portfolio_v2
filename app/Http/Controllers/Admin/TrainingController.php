@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class TrainingController extends Controller
 {
+    public function index()
+    {
+        $training = Training::all();
+        return view('admin.training.index', compact('training'));
+    }
+
     public function create()
     {
         return view('admin.training.create');
@@ -23,8 +29,8 @@ class TrainingController extends Controller
         $validated = $this->validate($request, [
             'title' => 'required|max:255',
             'description' => 'required',
-            'started_at' =>  'required|date|date_format:Y-m-d',
-            'finished_at' =>  'required|date|date_format:Y-m-d',
+            'started_at' =>  'required|date',
+            'finished_at' =>  'required|date',
             'cursus' => 'required',
             'links' => 'required',
             'pictures' => 'required',
@@ -46,23 +52,60 @@ class TrainingController extends Controller
 
     /**
      * Visualiser dans l'admin Training
-     * @param  \App\Models\Project $id
+     * @param  \App\Models\Training $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Training $training)
     {
-        return view('admin.training.show');
+        return view('admin.training.show')->with('training', $training);
     }
 
-    public function edit()
+    /**
+     * Edit Formation
+     */
+    public function edit($id)
     {
+        $training = Training::find($id);
+        return view('admin.training.edit')->with('training', $training);
     }
 
-    public function update()
+    /**
+     * Update Formation
+     */
+    public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'started_at' =>  'required|date',
+            'finished_at' =>  'required|date',
+            'cursus' => 'required',
+            'links' => 'required',
+            'pictures' => 'required',
+        ]);
+
+        $training = Training::find($id);
+        $training->title = $request->input('title');
+        $training->description = $request->input('description');
+        $training->started_at = $request->input('started_at');
+        $training->finished_at = $request->input('finished_at');
+        $training->cursus = $request->input('cursus');
+        $training->links = $request->input('links');
+        $training->pictures = $request->input('pictures');
+
+        $training->save();
+        $request->session()->flash('success', 'Enregister');
+        return redirect()->route('admin.training.show', $training->id);
     }
 
-    public function destroy()
+    /**
+     * DELETE FORMATION
+     */
+    public function destroy(Request $request, $id)
     {
+        $training = Training::find($id);
+        $training->delete();
+        $request->session()->flash('success', 'la Formation ' . $id . ' a bien été supprimer avec succès');
+        return redirect()->route('admin.training.index', $training->id);
     }
 }
