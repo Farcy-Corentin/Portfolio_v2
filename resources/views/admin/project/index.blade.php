@@ -44,9 +44,9 @@
                     @endforeach
                  </tbody>
               </table>
-                <div class="text-center">
-				    {!! $projects->links('pagination::bootstrap-4'); !!}
-			    </div>
+             <div class="text-center">
+                {!! $projects->links('pagination::bootstrap-4'); !!}
+             </div>
         </div>
     </div>
 @endsection
