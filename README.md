@@ -16,6 +16,7 @@
   - [Author](#author)
 
 ## Introduction
+Création de mon portfolio sur Laravel
 
 ## Requirements
 - [PHP](https://www.php.net/downloads)
@@ -23,6 +24,12 @@
 - [Git](https://git-scm.com/download/)
 
 ## Installation
+- On Github, go to the main page of the project
+- Open a terminal, or git bash
+- Replace the current working directory with the location where you want to clone it.
+- Type ```git clone https://github.com/Grezor/Portfolio_v2.git ```
+- Press on ```Entry```
+
 
 ## Technologies
 ```
@@ -30,10 +37,21 @@
 ```
 ## Start
 
+- Once the installation is complete, type **npm -i** in the terminal. Install the dependencies in the local node_modules
+folder.
+- entry to project
+- Run ```composer install``` on your cmd or terminal
+- Copy ```.env.example``` file to ```.env``` on the root folder. 
+- Open your .env file and change the database name (DB_DATABASE) to whatever you have, username (DB_USERNAME) and password (DB_PASSWORD) field correspond to your configuration.
+  By default, the username is root and you can leave the password field empty. (This is for Xampp)
+  By default, the username is root and password is also root. (This is for Lamp)
+- Run ```php artisan migrate```
+- Run ```php artisan serve```
+
 ## Functionality
-
+```in progress```
 ## Improvement
-
+```in progress```
 ## Contribute
 It's hard. It's always hard the first time you do something. Especially when you are collaborating, making mistakes
 isn't a comfortable thing. We wanted to simplify the way new open-source contributors learn & contribute for the first
