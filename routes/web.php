@@ -20,9 +20,11 @@ Route::get('/skills', [SkillController::class, 'getSkill']);
 //     return view('trainings');
 // });
 
+/**
+ * Routes project
+ */
 Route::get('/projects', [ProjectController::class, 'getProject']);
-
-// Route::get('/projects', [ProjectController::class, 'getProject']);
+Route::get('/projects/{slug}', [ProjectController::class, 'showProject'])->where('slug', '[\w\d\-\_]+');
 
 Route::get('/experiences', [ExperienceController::class, 'getExperience']);
 
