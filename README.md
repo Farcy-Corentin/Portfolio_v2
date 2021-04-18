@@ -47,7 +47,7 @@ folder.
   By default, the username is root and password is also root. (This is for Lamp)
 - Run ```php artisan migrate```
 - Run ```php artisan serve```
-- ```
+```
 Starting Laravel development server: http://127.0.0.1:8000
 [Thu Apr 15 21:30:12 2021] PHP 8.0.0 Development Server (http://127.0.0.1:8000) started
 ```
