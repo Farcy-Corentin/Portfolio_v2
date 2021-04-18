@@ -17,8 +17,8 @@ class CreateTrainingsTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->dateTime('started_at');
-            $table->dateTime('finished_at')->nullable();
+            $table->date('started_at');
+            $table->date('finished_at')->nullable();
             $table->string('cursus');
             $table->string('links');
             $table->string('pictures');

@@ -25,6 +25,7 @@ class TrainingFactory extends Factory
             'title' => $this->faker->name,
             'description' => $this->faker->paragraph(3, true),
             'started_at' => $this->faker->date(),
+            'finished_at' => $this->faker->date(),
             'cursus' =>  $this->faker->name,
             'links' => 'https://www.google.com/',
             'pictures' => 'https://via.placeholder.com/150',
