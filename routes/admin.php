@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\ProjectController;
 
 use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\TrainingController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\UsersController;
 
 use Illuminate\Support\Facades\Route;
 

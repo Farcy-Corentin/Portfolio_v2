@@ -14,5 +14,6 @@
         <p>{{ $project->github_links }} </p>
         <p>{{ $project->online }} </p>
         <img src="{{ $project->pictures }}" alt="" srcset="">
+        <a href="{{ url('projects/' . $project->slug) }}" class="btn btn-primary">Read more</a>
     @endforeach
 @endsection

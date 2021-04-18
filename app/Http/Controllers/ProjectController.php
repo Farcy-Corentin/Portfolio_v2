@@ -12,4 +12,13 @@ class ProjectController extends Controller
         $projects = Project::all();
         return view('projects', compact('projects'));
     }
+
+    /**
+     * Affiche le slug (show project)
+     */
+    public function showProject($slug)
+    {
+        $project = Project::where('slug', $slug)->first();
+        return view('single', compact('project'));
+    }
 }
