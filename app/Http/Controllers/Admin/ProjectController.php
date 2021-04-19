@@ -33,6 +33,7 @@ class ProjectController extends Controller
         $validated = $this->validate($request, [
             'title' => 'required|max:255',
             'descriptions' => 'required',
+            'slug' => 'required|alpha_dash|min:5|max:255|unique:projects,slug',
             'started_at' =>  'required|date|date_format:Y-m-d',
             'finished_at' =>  'required|date|date_format:Y-m-d',
             'missions' => 'required',
@@ -47,6 +48,7 @@ class ProjectController extends Controller
         $project = new Project();
         $project->title = $validated['title'];
         $project->descriptions = $validated['descriptions'];
+        $project->slug = $validated['slug'];
         $project->started_at = $validated['started_at'];
         $project->finished_at = $validated['finished_at'];
         $project->missions = $validated['missions'];
@@ -91,23 +93,42 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'title' => 'required',
-            'descriptions' => 'required',
-            'started_at' => 'required',
-            'finished_at' => 'required',
-            'missions' => 'required',
-            'languages' => 'required',
-            'software' => 'required',
-            'links' => 'required',
-            'github_links' => 'required',
-            'online' => 'boolean',
-            'pictures' => 'required'
-        ]);
+        $post = Project::find($id);
+        if ($request->input('slug') == $post->slug) {
+            $this->validate($request, [
+                'title' => 'required',
+                'descriptions' => 'required',
+                'started_at' => 'required',
+                'finished_at' => 'required',
+                'missions' => 'required',
+                'languages' => 'required',
+                'software' => 'required',
+                'links' => 'required',
+                'github_links' => 'required',
+                'online' => 'boolean',
+                'pictures' => 'required'
+            ]);
+        } else {
+            $this->validate($request, [
+                'title' => 'required',
+                'descriptions' => 'required',
+                'slug' => 'required|min:3|max:255|unique:projects, slug',
+                'started_at' => 'required',
+                'finished_at' => 'required',
+                'missions' => 'required',
+                'languages' => 'required',
+                'software' => 'required',
+                'links' => 'required',
+                'github_links' => 'required',
+                'online' => 'boolean',
+                'pictures' => 'required'
+            ]);
+        }
 
         $project = Project::find($id);
         $project->title = $request->input('title');
         $project->descriptions = $request->input('descriptions');
+        $project->slug = $request->input('slug');
         $project->started_at = $request->input('started_at');
         $project->finished_at = $request->input('finished_at');
         $project->missions = $request->input('missions');

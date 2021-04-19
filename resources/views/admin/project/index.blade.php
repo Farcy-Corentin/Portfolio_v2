@@ -32,9 +32,9 @@
                         <th>{{substr($project->descriptions, 0, 50 )}}</th>
                         <th>{{$project->created_at}}</th>
                         <th><?php if ($project->online === 1) { ?>
-                                <span class="badge badge-pill badge-success">online</span>
+                                <span class="dot"></span>
                             <?php } else { ?>
-                                <span class="badge badge-pill badge-danger">offline</span>
+                                <span class="statusOffline"></span>
                             <?php } ?>
                         </th>
                         <th>
