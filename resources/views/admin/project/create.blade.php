@@ -10,7 +10,10 @@
             {!! Form::open(['route' => 'admin.project.store', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
                 {{ Form::label('title', 'Title:') }}
                 {{ Form::text('title', null, ['class' => 'form-control']) }}
-
+                
+                {{ Form::label('categoryproject', 'Categories Project:') }}
+                {{ Form::select('categoryproject', $categoriesProject, ['class' => 'form-control']) }}
+                
                 {{ Form::label('descriptions', 'Descriptions:') }}
                 {{ Form::textarea('descriptions', null, ['class' => 'form-control']) }}
 

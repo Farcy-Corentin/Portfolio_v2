@@ -12,6 +12,9 @@
         {{ Form::label('title', 'Title :', ["class" => "form-spaceing-top, font-weight-bold" ]) }}
         {{ Form::text('title', null, ["class" => 'form-control']) }}
 
+        {{ Form::label('categoryproject', 'Categories Project:') }}
+        {{ Form::select('categoryproject', $categories, $project->categoryproject_id, ['class' => 'form-control']) }}
+
         {{ Form::label('description', 'Description :', ["class" => "form-spaceing-top, font-weight-bold" ]) }}
         {{ Form::textarea('descriptions', null, ["class" => 'form-control']) }}
 
