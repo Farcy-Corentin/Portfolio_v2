@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
+use App\Models\CategoryProject;
 use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -24,9 +26,11 @@ class ProjectFactory extends Factory
     {
         $title = $this->faker->name;
         $slug = Str::slug($title);
+
         return [
             'title' => $title,
             'descriptions' => $this->faker->sentence(6, true),
+            'categoryproject_id' => CategoryProject::factory(),
             'slug' => $slug,
             'started_at' => $this->faker->date(),
             'finished_at' => $this->faker->date(),

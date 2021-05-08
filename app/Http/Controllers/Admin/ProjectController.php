@@ -3,11 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
+use App\Models\CategoryProject;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $projects = Project::OrderBy('id', 'desc')->paginate(10);
@@ -34,6 +41,7 @@ class ProjectController extends Controller
             'title' => 'required|max:255',
             'descriptions' => 'required',
             'slug' => 'required|alpha_dash|min:5|max:255|unique:projects,slug',
+            'categoryproject_id' => 'required|exists:categoryproject,id',
             'started_at' =>  'required|date|date_format:Y-m-d',
             'finished_at' =>  'required|date|date_format:Y-m-d',
             'missions' => 'required',
@@ -48,6 +56,7 @@ class ProjectController extends Controller
         $project = new Project();
         $project->title = $validated['title'];
         $project->descriptions = $validated['descriptions'];
+        $project->categoryproject_id = (int) $validated['categoryproject_id'];
         $project->slug = $validated['slug'];
         $project->started_at = $validated['started_at'];
         $project->finished_at = $validated['finished_at'];

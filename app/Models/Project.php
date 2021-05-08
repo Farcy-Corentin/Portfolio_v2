@@ -5,11 +5,13 @@ namespace App\Models;
 use DateTime;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $id
  * @property string $title
  * @property string $descriptions
+ * @property string $categoryproject_id
  * @property DateTime $started_at
  * @property DateTime $finished_at
  * @property string $missions
@@ -27,4 +29,9 @@ class Project extends Model
     use HasFactory;
     
     protected $table = 'projects';
+
+    public function categoryproject(): BelongsTo
+    {
+        return $this->belongsTo(CategoryProject::class, 'categoryproject_id');
+    }
 }
