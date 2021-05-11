@@ -37,7 +37,6 @@ class ProjectController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
@@ -98,12 +97,12 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         $categories = CategoryProject::all();
-        // dd($categories);
+
         $cats = [];
         foreach ($categories as $categoryproject) {
             $cats[$categoryproject->id] = $categoryproject->title;
         }
-        // dd($cats[$categoryproject->id]);
+
         return view('admin.project.edit')->with([
             'project' => $project,
             'categories' => $cats

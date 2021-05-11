@@ -57,6 +57,7 @@ class TrainingController extends Controller
      */
     public function show(Training $training)
     {
+        dd($training);
         return view('admin.training.show')->with('training', $training);
     }
 

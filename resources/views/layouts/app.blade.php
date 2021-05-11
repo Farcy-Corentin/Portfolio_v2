@@ -91,8 +91,10 @@
                                  <a class="dropdown-item" href="{{ route('admin.skill.create') }}">Create Skill</a>
                                  <a class="dropdown-item" href="{{ route('admin.experience.create') }}">Create Experience</a>
                                  <a class="dropdown-item" href="{{ route('admin.training.create') }}">Create Training</a>
+                                 {{-- <a class="dropdown-item" href="{{ route('admin.categorieProject.create') }}">Create Categorie Project</a> --}}
                                 <hr>
                                 <a class="dropdown-item" href="{{ route('admin.experience.index') }}">All Experiences</a>
+                                <a class="dropdown-item" href="{{ route('admin.categoryProject.index') }}">All Categories Project</a>
                                 <a class="dropdown-item" href="{{ route('admin.project.index') }}">All Projects</a>
                                 <a class="dropdown-item" href="{{ route('admin.skill.index') }}">All Skills</a>
                                 <a class="dropdown-item" href="{{ route('admin.training.index') }}">All Trainings</a>

@@ -61,7 +61,6 @@ class SkillController extends Controller
     {
         return view('admin.skill.show');
     }
-    
     /**
      * Selectionne toutes les catégories prèsente en BDD
      * @return \Illuminate\Support\Collection

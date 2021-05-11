@@ -24,7 +24,7 @@ Route::get('/skills', [SkillController::class, 'getSkill']);
  * Routes project
  */
 Route::get('/projects', [ProjectController::class, 'getProject']);
-Route::get('/projects/{slug}', [ProjectController::class, 'showProject'])->where('slug', '[\w\d\-\_]+')->name('projectslug');;
+Route::get('/projects/{slug}', [ProjectController::class, 'showProject'])->where('slug', '[\w\d\-\_]+')->name('projectslug');
 
 Route::get('/experiences', [ExperienceController::class, 'getExperience']);
 
