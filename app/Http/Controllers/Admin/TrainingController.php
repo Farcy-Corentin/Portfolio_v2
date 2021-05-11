@@ -57,6 +57,7 @@ class TrainingController extends Controller
      */
     public function show(Training $training)
     {
+        dd($training);
         return view('admin.training.show')->with('training', $training);
     }
 
@@ -77,8 +78,8 @@ class TrainingController extends Controller
         $this->validate($request, [
             'title' => 'required|max:255',
             'description' => 'required',
-            'started_at' =>  'required|date',
-            'finished_at' =>  'required|date',
+            'started_at' =>  'required',
+            'finished_at' =>  'required',
             'cursus' => 'required',
             'links' => 'required',
             'pictures' => 'required',

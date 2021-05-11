@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property int $id
  * @property string $title
  * @property string $descriptions
- * @property DateTime $started_at
- * @property DateTime $finished_at
+ * @property Date $started_at
+ * @property Date $finished_at
  * @property string $cursus
  * @property string $links
  * @property string $pictures

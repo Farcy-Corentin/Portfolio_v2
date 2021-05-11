@@ -35,7 +35,7 @@
                     aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
+                {{ Auth::check() ? "logged in" : "logget out"}}
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
@@ -58,7 +58,7 @@
                             <a class="nav-link" href="/contact">Contact</a>
                         </li>
                     </ul>
-
+            
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -78,7 +78,7 @@
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
+                                Bonjour {{ Auth::user()->name }}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -91,8 +91,10 @@
                                  <a class="dropdown-item" href="{{ route('admin.skill.create') }}">Create Skill</a>
                                  <a class="dropdown-item" href="{{ route('admin.experience.create') }}">Create Experience</a>
                                  <a class="dropdown-item" href="{{ route('admin.training.create') }}">Create Training</a>
+                                 {{-- <a class="dropdown-item" href="{{ route('admin.categorieProject.create') }}">Create Categorie Project</a> --}}
                                 <hr>
                                 <a class="dropdown-item" href="{{ route('admin.experience.index') }}">All Experiences</a>
+                                <a class="dropdown-item" href="{{ route('admin.categoryProject.index') }}">All Categories Project</a>
                                 <a class="dropdown-item" href="{{ route('admin.project.index') }}">All Projects</a>
                                 <a class="dropdown-item" href="{{ route('admin.skill.index') }}">All Skills</a>
                                 <a class="dropdown-item" href="{{ route('admin.training.index') }}">All Trainings</a>

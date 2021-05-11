@@ -12,14 +12,14 @@
         {{ Form::label('title', 'Title :', ["class" => "form-spaceing-top, font-weight-bold" ]) }}
         {{ Form::text('title', null, ["class" => 'form-control']) }}
 
-        {{ Form::label('description', 'Description :', ["class" => "form-spaceing-top, font-weight-bold" ]) }}
+        {{ Form::label('description', 'Description :', ) }}
         {{ Form::textarea('description', null, ["class" => 'form-control']) }}
 
-        {{ Form::label('started_at', 'Started_at :', ["class" => "form-spaceing-top, font-weight-bold" ]) }}
-        {{ Form::datetime('started_at', null, ["class" => 'form-control']) }}
+        {{ Form::label('started_at', 'started_at:', ["class" => "form-spaceing-top, font-weight-bold" ]) }}
+        {{ Form::date('started_at', null, ['class' => 'form-control']) }}
 
-        {{ Form::label('finished_at', 'Finished_at :', ["class" => "form-spaceing-top, font-weight-bold" ]) }}
-        {{ Form::datetime('finished_at', null, ["class" => 'form-control']) }}
+        {{ Form::label('finished_at', 'finished_at:', ["class" => "form-spaceing-top, font-weight-bold" ]) }}
+        {{ Form::date('finished_at', null, ['class' => 'form-control']) }}
 
         {{ Form::label('cursus', 'Cursus :', ["class" => "form-spaceing-top, font-weight-bold" ]) }}
         {{ Form::datetime('cursus', null, ["class" => 'form-control']) }}

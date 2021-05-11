@@ -17,6 +17,7 @@ class CreateProjectsTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('descriptions');
+            $table->bigInteger('categoryproject_id');
             $table->dateTime('started_at');
             $table->dateTime('finished_at')->nullable();
             $table->string('missions');

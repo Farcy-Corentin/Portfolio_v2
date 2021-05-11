@@ -10,9 +10,15 @@
             {!! Form::open(['route' => 'admin.project.store', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
                 {{ Form::label('title', 'Title:') }}
                 {{ Form::text('title', null, ['class' => 'form-control']) }}
-
+                
+                {{ Form::label('categoryproject', 'Categories Project:') }}
+                {{ Form::select('categoryproject', $categoriesProject, ['class' => 'form-control']) }}
+                
                 {{ Form::label('descriptions', 'Descriptions:') }}
                 {{ Form::textarea('descriptions', null, ['class' => 'form-control']) }}
+
+                {{ Form::label('slug', 'slug:') }}
+                {{ Form::text('slug', null, ['class' => 'form-control', 'required' => '', 'minlength' => '5', 'maxlength' => '255']) }}
 
                 {{ Form::label('started_at', 'Started_at:') }}
                 {{ Form::date('started_at', null, ['class' => 'form-control']) }}

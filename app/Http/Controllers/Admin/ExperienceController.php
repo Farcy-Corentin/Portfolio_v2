@@ -68,7 +68,7 @@ class ExperienceController extends Controller
 
     public function edit($id)
     {
-        $experience = Experience::find($id);
+        $experience = Experience::find($id)->get();;
         return view('admin.experience.edit')->with('experience', $experience);
     }
 

@@ -8,18 +8,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int $id
- * @property string $name
+ * @property string $title
  * @property DateTime $created_at
  * @property DateTime $updated_at
  */
-class Category extends Model
+class CategoryProject extends Model
 {
     use HasFactory;
 
-    protected $table = 'categories';
+    protected $table = 'categoryproject';
 
-    public function skills(): HasMany
+    public function projects(): HasMany
     {
-        return $this->hasMany(Skill::class, 'category_id');
+        return $this->hasMany(Project::class, 'categoryproject_id');
     }
 }

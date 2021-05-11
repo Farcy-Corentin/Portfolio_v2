@@ -25,9 +25,26 @@
 
         <div class="col-md-4">
             <div class="well">
+
                 <dl class="dl-horizontal">
-                    <dt>Created At:</dt>
+                    <dt>url :</dt>
+                    <dd><a href="{{ route('projectslug', $project->slug) }}">{{ route('projectslug', $project->slug) }}</a></dd>
+                </dl>
+
+                <dl class="dl-horizontal">
+                    <dt>Created At :</dt>
                     <dd><p>{{ $project->created_at }}</p></dd>
+                </dl>
+
+                <dl class="dl-horizontal">
+                    <dt>Status :</dt>
+                    <dd>
+                        <?php if ($project->online === 1) { ?>
+                            <div class="dot"></div>
+                        <?php } else { ?>
+                            <div class="statusOffline"></div>
+                        <?php } ?>
+                    </dd>
                 </dl>
 
                 <dl class="dl-horizontal">
@@ -41,10 +58,10 @@
                     </div>
 
                      <div class="col-sm-6">
-                         
+                         <a href="">
                         {!! Form::open(['route' => ['admin.project.destroy', $project->id], 'method' => 'DELETE']) !!}
                         {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block']) !!}
-                        {!! Form::close() !!}
+                        {!! Form::close() !!}</a>
                     </div>
                 </div>
             </div>

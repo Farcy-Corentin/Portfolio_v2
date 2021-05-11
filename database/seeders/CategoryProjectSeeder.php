@@ -5,9 +5,8 @@ namespace Database\Seeders;
 use App\Models\CategoryProject;
 use App\Models\Project;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
-class ProjectSeeder extends Seeder
+class CategoryProjectSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,9 +15,9 @@ class ProjectSeeder extends Seeder
      */
     public function run()
     {
-        Project::factory()
-            ->count(20)
-            ->has(CategoryProject::factory()->count(5), 'categoryproject')
+        CategoryProject::factory()
+            ->count(5)
+            ->has(Project::factory()->count(5), 'projects')
             ->create();
     }
 }
