@@ -12,8 +12,8 @@
                 {{ Form::text('title', null, ['class' => 'form-control']) }}
                 
                 {{ Form::label('categoryproject', 'Categories Project:') }}
-                {{ Form::select('categoryproject', $categoriesProject, ['class' => 'form-control']) }}
-                
+                {!! Form::select('categoryproject', $categoriesProject, null, ['class' => 'form-control']) !!}
+               
                 {{ Form::label('descriptions', 'Descriptions:') }}
                 {{ Form::textarea('descriptions', null, ['class' => 'form-control']) }}
 

@@ -12,7 +12,7 @@
                 {{ Form::text('name', null, ['class' => 'form-control']) }}
 
                 {{ Form::label('category', 'Categories:') }}
-                {{ Form::select('category', $categories) }}
+                {{ Form::select('category', $categories, null, ['class' => 'form-control']) }}
 
                 {{ Form::label('skills', 'Skills:') }}
                 {{ Form::textarea('skills', null, ['class' => 'form-control']) }}

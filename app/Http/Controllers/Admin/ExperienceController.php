@@ -65,10 +65,13 @@ class ExperienceController extends Controller
     {
         return view('admin.experience.show')->with('experience', $experience);
     }
-
+    /**
+     * Editer une Expérience
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
-        $experience = Experience::find($id)->get();;
+        $experience = Experience::find($id);
         return view('admin.experience.edit')->with('experience', $experience);
     }
 

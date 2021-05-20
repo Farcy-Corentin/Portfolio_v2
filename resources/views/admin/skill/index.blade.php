@@ -10,6 +10,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Name</th>
                         <th>Category name</th>
                         <th>Skills</th>
@@ -19,29 +20,29 @@
                 <tbody>
                     @forelse ($skills as $skill)
                         <tr>
-                            <td>
+                            <th>
+                                {{ $skill->id }}
+                            </th>
+                            <th>
                                 <a href="{{ route('admin.skill.show', ['skill' => $skill->id]) }}">
                                     {{ $skill->name }}
                                 </a>
-                            </td>
-                            <td>
+                            </th>
+                            <th>
                                 {{ $skill->category->name }}
-                            </td>
-                            <td>
+                            </th>
+                            <th>
                                 {{ $skill->skills }}
-                            </td>
-                            <td class="btn-group">
-                                <a href="{{ route('admin.skill.show', ['skill' => $skill->id]) }}" class="btn btn-success">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                                <form action="{{ route('admin.skill.destroy', ['skill' => $skill->id]) }}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
+                            </th>
+                            <th>
+                                <a href="{{ route('admin.skill.show', $skill->id) }}" class="btn btn-outline-primary">View</a>
+                            </th>
+                            <th>
+
+                                {!! Form::open(['route' => ['admin.skill.destroy', $skill->id], 'method' => 'DELETE']) !!}
+                                   {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block']) !!}
+                                   {!! Form::close() !!}</a>
+                            </tr>
                         </tr>
                     @empty
                         <tr>
