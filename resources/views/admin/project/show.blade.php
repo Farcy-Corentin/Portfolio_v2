@@ -19,7 +19,7 @@
         <p>{{ $project->links }}</p>
         <p>{{ $project->github_links }}</p>
         <p>{{ $project->online }}</p>
-        <p>{{ $project->pictures }}</p>
+        {{-- fetch preview image(s) --}}
 
         </div>
 

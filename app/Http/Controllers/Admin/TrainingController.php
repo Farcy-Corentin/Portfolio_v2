@@ -8,12 +8,26 @@ use Illuminate\Http\Request;
 
 class TrainingController extends Controller
 {
+    /**
+     * 
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    /**
+     * 
+     */
     public function index()
     {
         $training = Training::all();
         return view('admin.training.index', compact('training'));
     }
-
+    
+    /**
+     * 
+     */
     public function create()
     {
         return view('admin.training.create');

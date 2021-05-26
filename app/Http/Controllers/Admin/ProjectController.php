@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
-use App\Models\CategoryProject;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+use App\Models\ImageProject;
 use Illuminate\Http\Request;
+use App\Models\CategoryProject;
 use Illuminate\Support\Collection;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use App\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
+use Illuminate\Contracts\View\Factory;
 
 class ProjectController extends Controller
 {
@@ -23,20 +26,23 @@ class ProjectController extends Controller
         $projects = Project::OrderBy('id', 'desc')->paginate(10);
         return view('admin.project.index', compact('projects'));
     }
-
+    
     /**
-     * Show the form for creating a new resource.
-     * @return \Illuminate\Http\Response
-     * 
+     * create new project
+     *
+     * @return Factory
      */
     public function create(): Factory|View
     {
         return view('admin.project.create', [
-            'categoriesProject' => $this->selectCategoriesProject()
+            'categoriesProject' => $this->selectCategoriesProject(),
+             'imageproject' => ImageProject::class
         ]);
     }
 
     /**
+     * store
+     *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
@@ -54,11 +60,11 @@ class ProjectController extends Controller
             'software' => 'required',
             'links' => 'required',
             'github_links' => 'required',
-            'online' => 'required',
-            'pictures' => 'required',
+            'imageFile' => 'required',
+            'imageFile.*' => 'mimes:jpeg,jpg,png,gif|max:5000'
         ]);
 
-        $project = new Project();
+        $project = new Project;
         $project->title = $validated['title'];
         $project->descriptions = $validated['descriptions'];
         $project->categoryproject_id = (int) $validated['categoryproject'];
@@ -70,18 +76,34 @@ class ProjectController extends Controller
         $project->software = $validated['software'];
         $project->links = $validated['links'];
         $project->github_links = $validated['github_links'];
-        $project->online = $validated['online'];
-        $project->pictures = $validated['pictures'];
+        $project->online = $request->has('online');
 
         $project->save();
+        $project->refresh();
+        // upload image
+        foreach($validated['imageFile'] as $file)
+        {
+            $random = Str::random();
+            $filename = "{$project->id}-{$random}";
+            $file->move(public_path().'/uploads/', $filename);
+            
+            $fileModal = new ImageProject();
+            $fileModal->project_id = $project->id;
+            $fileModal->name = $file->getClientOriginalName();
+            $fileModal->image_path = $filename;
+            $fileModal->save();
+        }
+
         $request->session()->flash('success', 'Enregister');
         return redirect()->route('admin.project.show', $project->id);
     }
 
+        
     /**
-     * Visualiser dans l'admin
-     * @param  \App\Models\Project $project
-     * @return \Illuminate\Http\Response
+     * show project
+     *
+     * @param mixed $project
+     * @return void
      */
     public function show(Project $project)
     {
@@ -113,7 +135,7 @@ class ProjectController extends Controller
     /**
      * Mettre a jour un projet
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Project $project
+     * @param  $id 
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -132,7 +154,7 @@ class ProjectController extends Controller
                 'links' => 'required',
                 'github_links' => 'required',
                 'online' => 'boolean',
-                'pictures' => 'required'
+                'imageproject' => 'required'
             ]);
         } else {
             $this->validate($request, [
@@ -148,7 +170,7 @@ class ProjectController extends Controller
                 'links' => 'required',
                 'github_links' => 'required',
                 'online' => 'boolean',
-                'pictures' => 'required'
+                'imageproject' => 'required'
             ]);
         }
 
@@ -165,7 +187,7 @@ class ProjectController extends Controller
         $project->links = $request->input('links');
         $project->github_links = $request->input('github_links');
         $project->online = $request->input('online');
-        $project->pictures = $request->input('pictures');
+        $project->imageproject_id = $request->input('imageproject');
 
         $project->save();
         $request->session()->flash('success', 'Enregister');

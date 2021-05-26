@@ -10,6 +10,10 @@ use Illuminate\Contracts\View\View;
 
 class CategoryProjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * 
      */

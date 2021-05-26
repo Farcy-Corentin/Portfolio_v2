@@ -9,6 +9,12 @@ use App\Http\Controllers\Controller;
 
 class ExperienceController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Create form admin experience
      * @return \Illuminate\Http\Response
@@ -65,6 +71,7 @@ class ExperienceController extends Controller
     {
         return view('admin.experience.show')->with('experience', $experience);
     }
+    
     /**
      * Editer une Expérience
      * @return \Illuminate\Http\Response
@@ -78,6 +85,8 @@ class ExperienceController extends Controller
     /**
      * Update experience 
      * @param Request $request
+     * @param int $id
+     * @return int 
      */
     public function update(Request $request, $id)
     {
