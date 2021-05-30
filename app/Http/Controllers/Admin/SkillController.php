@@ -74,7 +74,7 @@ class SkillController extends Controller
         return view('admin.skill.show')->with('skill', $skill);
     }
 
-    public function destroy(Request $request,int $id): Redirector|RedirectResponse
+    public function destroy(Request $request, int $id): Redirector|RedirectResponse
     {
         $skill = Skill::find($id);
         if ($skill === null) {
