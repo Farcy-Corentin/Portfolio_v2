@@ -33,7 +33,6 @@ class ExperienceController extends Controller
         return view('admin.experience.index', compact('experiences'));
     }
 
-
     public function store(Request $request): Redirector|RedirectResponse
     {
         $validated = $this->validate($request, [

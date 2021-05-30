@@ -90,8 +90,6 @@ class ProjectController extends Controller
         return redirect()->route('admin.project.show', $project->id);
     }
 
-        
-
     public function show(Project $project): View|Factory
     {
         return view('admin.project.show')->with('project', $project);

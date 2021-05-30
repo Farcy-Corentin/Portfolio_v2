@@ -50,7 +50,6 @@ class SkillController extends Controller
             ]);
     }
 
-
     public function update(Request $request): Redirector|RedirectResponse
     {
         $validated = $this->validate($request, [

@@ -64,23 +64,7 @@ class CategoryProjectController extends Controller
         return view('admin.categoryProject.edit')->with('categoryProject', $categoryProject);
     }
 
-    // public function update(Request $request, int $id): Redirect|RedirectResponse
-    // {
-    //     $this->validate($request, [
-    //         'title' => 'required|null',
-    //         'description' => 'required',
-    //     ]);
-
-    //     $categoryProject = CategoryProject::find($id);
-    //     $categoryProject->title = $request->input('title');
-    //     $categoryProject->description = $request->input('description');
-
-    //     $categoryProject->save();
-    //     $request->session()->flash('success', 'Enregister');
-    //     return redirect()->route('admin.categoryProject.show', $categoryProject->id);
-    // }
-
-     public function update(Request $request, int $id): Redirect|RedirectResponse
+    public function update(Request $request, int $id): Redirect|RedirectResponse
     {
         $validated = $this->validate($request, [
             'title' => 'required|null',
