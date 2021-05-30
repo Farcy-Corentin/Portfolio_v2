@@ -176,8 +176,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
-        // images project
-        Intervention\Image\ImageServiceProvider::class
 
 
     ],
@@ -234,7 +232,6 @@ return [
 
         'Form' => Collective\Html\FormFacade::class,
         'HTML' => Collective\Html\HTMLFacade::class,
-        'Image' => Intervention\Image\Facades\Image::class
 
     ],
 

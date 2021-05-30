@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Skill;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
 
 class SkillController extends Controller
 {
-    public function getSkill()
+    public function getSkill(): View|Factory
     {
         $skills = Skill::all();
         return view('skills', compact('skills'));

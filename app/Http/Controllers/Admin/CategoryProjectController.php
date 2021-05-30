@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\CategoryProject;
 use Illuminate\Http\Request;
-use Illuminate\Contracts\View\Factory;
+use App\Models\CategoryProject;
 use Illuminate\Contracts\View\View;
+use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\Client\Response as ClientResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
+use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 
 class CategoryProjectController extends Controller
 {
@@ -14,29 +20,24 @@ class CategoryProjectController extends Controller
     {
         $this->middleware('auth');
     }
-    /**
-     * 
-     */
-   public function index()
+         
+   public function index(): View|Factory
    {
      $categoryProject = CategoryProject::all();
      return view('admin.categoryProject.index', compact('categoryProject'));
    }
 
    /**
+    * create
     *
+    * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     */
-   public function create(): Factory|View
+   public function create()
    {
     return view('admin.categoryProject.create');
    }
 
-   /**
-     * Validation du formulaire
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(Request $request): Redirector|RedirectResponse
     {
         $validated = $this->validate($request, [
             'title' => 'required',
@@ -52,59 +53,54 @@ class CategoryProjectController extends Controller
         return redirect()->route('admin.categoryProject.show', $categoryProject->id);
     }
     
-    /**
-     * @param  \App\Models\CategoryProject $categoryProject
-     * @return \Illuminate\Http\Response
-     */
-    public function show(CategoryProject $categoryProject)
+    public function show(CategoryProject $categoryProject): View|Factory
     {
-        // dd($categoryProject);
         return view('admin.categoryProject.show')->with('categoryProject', $categoryProject);
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(int $id): View|Factory
     {
         $categoryProject = CategoryProject::find($id);
-      
         return view('admin.categoryProject.edit')->with('categoryProject', $categoryProject);
     }
 
-    /**
-     * Mettre a jour un projet
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\CategoryProject $project
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    // public function update(Request $request, int $id): Redirect|RedirectResponse
+    // {
+    //     $this->validate($request, [
+    //         'title' => 'required|null',
+    //         'description' => 'required',
+    //     ]);
+
+    //     $categoryProject = CategoryProject::find($id);
+    //     $categoryProject->title = $request->input('title');
+    //     $categoryProject->description = $request->input('description');
+
+    //     $categoryProject->save();
+    //     $request->session()->flash('success', 'Enregister');
+    //     return redirect()->route('admin.categoryProject.show', $categoryProject->id);
+    // }
+
+     public function update(Request $request, int $id): Redirect|RedirectResponse
     {
-        $this->validate($request, [
-            'title' => 'required',
-            'description' => 'required',
+        $validated = $this->validate($request, [
+            'title' => 'required|null',
+            'description' => 'required|null',
         ]);
 
-        $categoryProject = CategoryProject::find($id);
-        $categoryProject->title = $request->input('title');
-        $categoryProject->description = $request->input('description');
+        $categoryProject = new CategoryProject();
+        $categoryProject->title = $validated['title'];
+        $categoryProject->description = $validated['description'];
 
         $categoryProject->save();
         $request->session()->flash('success', 'Enregister');
         return redirect()->route('admin.categoryProject.show', $categoryProject->id);
     }
 
-    
-    /**
-     * Delete Categorie Project
-     * @param Request $request 
-     * @param $id : l'id categorie
-     */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request, int $id): Redirector|RedirectResponse
     {
-        $categoryProject = CategoryProject::find($id);
+        // $categoryProject = CategoryProject::find($id)->delete();
+        $categoryProject = new CategoryProject();
+        $categoryProject::find($id);
         $categoryProject->delete();
         $request->session()->flash('success', 'l\'expériences ' . $id . 'a bien été supprimer avec succès');
         return redirect()->route('admin.categoryProject.index', $categoryProject->id);

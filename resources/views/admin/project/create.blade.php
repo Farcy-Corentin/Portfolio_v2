@@ -44,7 +44,9 @@
                 {{ Form::label('online', 'online:') }}
                 {{ Form::checkbox('online', 0, false) }}
 
-         
+                <img id="image_preview_container" src="{{ asset('public/image/uploads/image-preview.png') }}"
+                alt="preview image" style="max-height: 150px;">
+  
                 <div class="form-group">
                     <input type="file" name="imageFile[]" multiple class="form-control" accept="image/*">
                     @if ($errors->has('files'))
@@ -55,15 +57,15 @@
                         @endforeach
                     @endif
                 </div>
-         
+
                 {{ Form::submit('Create Project', 
                     [
                         'class' => 'btn btn-success btn-lg btn-black',
                         'style' => 'margin-top: 20px;'
                     ]
                 )}}
+
         {!! Form::close() !!}
-      
         </div>
     </div>
 </div>

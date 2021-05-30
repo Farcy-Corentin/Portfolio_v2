@@ -12,6 +12,8 @@ use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 
 class ProjectController extends Controller
 {
@@ -21,17 +23,13 @@ class ProjectController extends Controller
         $this->middleware('auth');
     }
     
-    public function index()
+    public function index(): View|Factory
+
     {
         $projects = Project::OrderBy('id', 'desc')->paginate(10);
         return view('admin.project.index', compact('projects'));
     }
-    
-    /**
-     * create new project
-     *
-     * @return Factory
-     */
+
     public function create(): Factory|View
     {
         return view('admin.project.create', [
@@ -40,13 +38,7 @@ class ProjectController extends Controller
         ]);
     }
 
-    /**
-     * store
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(Request $request): Redirector|RedirectResponse
     {
         $validated = $this->validate($request, [
             'title' => 'required|max:255',
@@ -64,10 +56,10 @@ class ProjectController extends Controller
             'imageFile.*' => 'mimes:jpeg,jpg,png,gif|max:5000'
         ]);
 
-        $project = new Project;
+        $project = new Project();
         $project->title = $validated['title'];
         $project->descriptions = $validated['descriptions'];
-        $project->categoryproject_id = (int) $validated['categoryproject'];
+        $project->categoryproject_id = (string) $validated['categoryproject'];
         $project->slug = $validated['slug'];
         $project->started_at = $validated['started_at'];
         $project->finished_at = $validated['finished_at'];
@@ -76,7 +68,7 @@ class ProjectController extends Controller
         $project->software = $validated['software'];
         $project->links = $validated['links'];
         $project->github_links = $validated['github_links'];
-        $project->online = $request->has('online');
+        $project->online = (int) $request->has('online');
 
         $project->save();
         $project->refresh();
@@ -86,7 +78,7 @@ class ProjectController extends Controller
             $random = Str::random();
             $filename = "{$project->id}-{$random}";
             $file->move(public_path().'/uploads/', $filename);
-            
+
             $fileModal = new ImageProject();
             $fileModal->project_id = $project->id;
             $fileModal->name = $file->getClientOriginalName();
@@ -99,23 +91,13 @@ class ProjectController extends Controller
     }
 
         
-    /**
-     * show project
-     *
-     * @param mixed $project
-     * @return void
-     */
-    public function show(Project $project)
+
+    public function show(Project $project): View|Factory
     {
         return view('admin.project.show')->with('project', $project);
     }
 
-    /**
-     * Editer un Projet
-     * @param  \App\Models\Project $project
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(int $id): View|Factory
     {
         $project = Project::find($id);
         $categories = CategoryProject::all();
@@ -132,17 +114,11 @@ class ProjectController extends Controller
 
     }
 
-    /**
-     * Mettre a jour un projet
-     * @param  \Illuminate\Http\Request  $request
-     * @param  $id 
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request): Redirector|RedirectResponse
     {
-        $post = Project::find($id);
+        $post = new Project();
         if ($request->input('slug') == $post->slug) {
-            $this->validate($request, [
+            $validated = $this->validate($request, [
                 'title' => 'required',
                 'descriptions' => 'required',
                 'categoryproject' => 'required',
@@ -157,7 +133,7 @@ class ProjectController extends Controller
                 'imageproject' => 'required'
             ]);
         } else {
-            $this->validate($request, [
+            $validated = $this->validate($request, [
                 'title' => 'required',
                 'descriptions' => 'required',
                 'categoryproject' => 'required',
@@ -174,45 +150,36 @@ class ProjectController extends Controller
             ]);
         }
 
-        $project = Project::find($id);
-        $project->title = $request->input('title');
-        $project->descriptions = $request->input('descriptions');
-        $project->categoryproject_id = $request->input('categoryproject');
-        $project->slug = $request->input('slug');
-        $project->started_at = $request->input('started_at');
-        $project->finished_at = $request->input('finished_at');
-        $project->missions = $request->input('missions');
-        $project->languages = $request->input('languages');
-        $project->software = $request->input('software');
-        $project->links = $request->input('links');
-        $project->github_links = $request->input('github_links');
-        $project->online = $request->input('online');
-        $project->imageproject_id = $request->input('imageproject');
+        $project = new Project();
+        $project->title = $validated['title'];
+        $project->descriptions = $validated['descriptions'];
+        $project->categoryproject_id = $validated['categoryproject_id'];
+        $project->slug = $validated['slug'];
+        $project->started_at = $validated['started_at'];
+        $project->finished_at = $validated['finished_at'];
+        $project->missions = $validated['missions'];
+        $project->languages = $validated['languages'];
+        $project->software =$validated['software'];
+        $project->links = $validated['links'];
+        $project->github_links = $validated['github_links'];
+        $project->online = $validated['online'];
+        $project->imageproject_id = $validated['imageproject_id'];
 
         $project->save();
         $request->session()->flash('success', 'Enregister');
         return redirect()->route('admin.project.show', $project->id);
     }
 
-    /**
-     * Supprimer un projet
-     * @param  \App\Models\Project $project
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request,mixed $id): Redirector|RedirectResponse
     {
-        $project = Project::find($id);
+        // $project = Project::findOrFail($id)->delete();
+        $project = new Project();
+        $project::find($id);
         $project->delete();
         $request->session()->flash('success', 'Le projet ' . $id . ' a bien etais suprpimer');
         return redirect()->route('admin.project.index', $project->id);
     }
 
-    /**
-     * Selectionne toutes les catégories prèsente en BDD
-     * La méthode pluck récupère toutes les valeurs pour 
-     *   une clé donnée
-     * @return \Illuminate\Support\Collection
-     */
     public function selectCategoriesProject(): Collection
     {
         return CategoryProject::all()->pluck('title', 'id');
