@@ -19,8 +19,11 @@
         <p>{{ $project->links }}</p>
         <p>{{ $project->github_links }}</p>
         <p>{{ $project->online }}</p>
-        <p>{{ $project->pictures }}</p>
-
+        {{-- fetch preview image(s) --}}
+        @foreach ($fileModals as $fileModal)
+            <li>{{ $fileModal->image_path }}</li>
+            <img src="{{ asset('storage/images/' . $photo->name )}}" alt="">
+        @endforeach
         </div>
 
         <div class="col-md-4">

@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Skill;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Collection;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\View\Factory;
 
 class SkillController extends Controller
 {
 
-    /**
-     * 
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index(): Factory|View
     {
         return view('admin.skill.index', [
@@ -23,9 +27,6 @@ class SkillController extends Controller
         ]);
     }
 
-    /**
-     * 
-     */
     public function create(): Factory|View
     {
         return view('admin.skill.create', [
@@ -33,11 +34,7 @@ class SkillController extends Controller
         ]);
     }
 
-    /**
-     * Editer une Compétences
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(int $id): View|Factory
     {
         $skill = Skill::find($id);
         $categoriesSkill = Category::all();
@@ -53,12 +50,7 @@ class SkillController extends Controller
             ]);
     }
 
-    /**
-     * Update Skill
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
+    public function update(Request $request): Redirector|RedirectResponse
     {
         $validated = $this->validate($request, [
             'name' => 'required|max:255',
@@ -76,32 +68,26 @@ class SkillController extends Controller
         return redirect()->route('admin.skill.show', $skill->id);
     }
 
-    /**
-     * Visualiser les compétences
-     * @param  \App\Models\Skill $skill
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Skill $skill)
+    public function show(Skill $skill): View|Factory
     {
         return view('admin.skill.show')->with('skill', $skill);
     }
 
-    /**
-     * Supprimer une compétence
-     * @param  \App\Models\Skill $skill
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request, int $id): Redirector|RedirectResponse
     {
         $skill = Skill::find($id);
+        if ($skill === null) {
+            return back()->with('error', 'Skill not found');
+        }
+
         $skill->delete();
-        $request->session()->flash('success', 'La compétences ' . $id . ' a bien etais suprpimer');
+
+        $request->session()->flash('success', "La compétences {$id} a bien etais suprpimer");
         return redirect()->route('admin.skill.index', $skill->id);
     }
 
     /**
-     * Selectionne toutes les catégories prèsente en BDD
-     * @return \Illuminate\Support\Collection
+     * Selectionne toutes les catégories
      */
     private function selectCategorie(): Collection
     {

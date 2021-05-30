@@ -6,6 +6,7 @@ use DateTime;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int $id
@@ -20,7 +21,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $links
  * @property string $github_links
  * @property int $online
- * @property string $pictures
+ * @property string $imageproject_id
  * @property DateTime $created_at
  * @property DateTime $updated_at
  */
@@ -33,5 +34,10 @@ class Project extends Model
     public function categoryproject(): BelongsTo
     {
         return $this->belongsTo(CategoryProject::class, 'categoryproject_id');
+    }
+
+    public function images(): HasMany
+    {
+        return $this->hasMany(ImageProject::class, 'project_id');
     }
 }

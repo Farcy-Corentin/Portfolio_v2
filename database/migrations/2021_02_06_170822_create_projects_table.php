@@ -26,7 +26,6 @@ class CreateProjectsTable extends Migration
             $table->string('links');
             $table->string('github_links');
             $table->boolean('online');
-            $table->string('pictures');
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Category;
 use App\Models\CategoryProject;
+use App\Models\ImageProject;
 use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -39,8 +40,7 @@ class ProjectFactory extends Factory
             'software' => $this->faker->sentence(6, true),
             'links' => 'https://www.google.com/',
             'github_links' => 'https://github.com/Grezor',
-            'online' => $this->faker->boolean,
-            'pictures' => 'https://via.placeholder.com/150',
+            'online' => $this->faker->boolean
         ];
     }
 }

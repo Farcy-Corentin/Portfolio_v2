@@ -47,7 +47,7 @@
         <br>
 
         {{ Form::label('pictures', 'Pictures :', ["class" => "form-spaceing-top, font-weight-bold" ]) }}
-        {{ Form::text('pictures',null, ["class" => 'form-control']) }}
+
 
         </div>
 

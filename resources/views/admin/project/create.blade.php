@@ -7,7 +7,7 @@
         <div class="col-md-8 col-md-offset-2">
             <h1>Create New Project</h1>
             <hr>
-            {!! Form::open(['route' => 'admin.project.store', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['route' => 'admin.project.store', 'method' => 'post', 'enctype' => 'multipart/form-data', 'files' => true ]) !!}
                 {{ Form::label('title', 'Title:') }}
                 {{ Form::text('title', null, ['class' => 'form-control']) }}
                 
@@ -44,8 +44,19 @@
                 {{ Form::label('online', 'online:') }}
                 {{ Form::checkbox('online', 0, false) }}
 
-                {{ Form::label('pictures', 'pictures:') }}
-                {{ Form::text('pictures', null, ['class' => 'form-control']) }}
+                <img id="image_preview_container" src="{{ asset('public/image/uploads/image-preview.png') }}"
+                alt="preview image" style="max-height: 150px;">
+  
+                <div class="form-group">
+                    <input type="file" name="imageFile[]" multiple class="form-control" accept="image/*">
+                    @if ($errors->has('files'))
+                        @foreach ($errors->get('files') as $error)
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $error }}</strong>
+                        </span>
+                        @endforeach
+                    @endif
+                </div>
 
                 {{ Form::submit('Create Project', 
                     [
@@ -53,7 +64,8 @@
                         'style' => 'margin-top: 20px;'
                     ]
                 )}}
-            {!! Form::close() !!}
+
+        {!! Form::close() !!}
         </div>
     </div>
 </div>

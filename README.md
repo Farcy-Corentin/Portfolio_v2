@@ -10,10 +10,6 @@
   - [Installation](#installation)
   - [Technologies](#technologies)
   - [Start](#start)
-  - [Functionality](#functionality)
-  - [Improvement](#improvement)
-  - [Contribute](#contribute)
-  - [Author](#author)
 
 ## Introduction
 Création de mon portfolio sur Laravel
@@ -67,3 +63,22 @@ you are looking to make your first contribution, follow the steps below.
 
 ## Author
 **Duplessi Geoffrey**
+
+
+# LaraStan
+Larastan is a static analysis command-line tool by Nuno Maduro built on top of PHPStan and focuses on finding errors in your Laravel code before running it
+
+```sh
+create file ./phpstan.neon.dist
+```
+```yml
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+    paths: 
+        - app
+    level: 8
+    # ignoreErrors:
+    checkMissingIterableValueType: false
+```

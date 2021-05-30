@@ -2,29 +2,38 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Training;
 use Illuminate\Http\Request;
+use Illuminate\View\Factory;
+use Illuminate\Routing\Redirector;
+use Illuminate\Contracts\View\View;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 
 class TrainingController extends Controller
 {
-    public function index()
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+
+    public function index(): View|Factory
     {
         $training = Training::all();
         return view('admin.training.index', compact('training'));
     }
-
-    public function create()
+    
+    /**
+     * 
+     */
+    public function create(): View|Factory
     {
         return view('admin.training.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(Request $request): Redirector|RedirectResponse
     {
         $validated = $this->validate($request, [
             'title' => 'required|max:255',
@@ -50,20 +59,12 @@ class TrainingController extends Controller
         return redirect()->route('admin.training.show', $training->id);
     }
 
-    /**
-     * Visualiser dans l'admin Training
-     * @param  \App\Models\Training $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Training $training)
+    public function show(Training $training): View|Factory
     {
         return view('admin.training.show')->with('training', $training);
     }
 
-    /**
-     * Edit Formation
-     */
-    public function edit($id)
+    public function edit(int $id): View|Factory
     {
         $training = Training::find($id);
         return view('admin.training.edit')->with('training', $training);
@@ -72,9 +73,9 @@ class TrainingController extends Controller
     /**
      * Update Formation
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id): Redirector|RedirectResponse
     {
-        $this->validate($request, [
+        $validated = $this->validate($request, [
             'title' => 'required|max:255',
             'description' => 'required',
             'started_at' =>  'required',
@@ -84,26 +85,24 @@ class TrainingController extends Controller
             'pictures' => 'required',
         ]);
 
-        $training = Training::find($id);
-        $training->title = $request->input('title');
-        $training->description = $request->input('description');
-        $training->started_at = $request->input('started_at');
-        $training->finished_at = $request->input('finished_at');
-        $training->cursus = $request->input('cursus');
-        $training->links = $request->input('links');
-        $training->pictures = $request->input('pictures');
+        $training = new Training();
+        $training->title = $validated['title'];;
+        $training->description = $validated['description'];
+        $training->started_at = $validated['started_at'];
+        $training->finished_at = $validated['finished_at'];
+        $training->cursus = $validated['cursus'];
+        $training->links = $validated['links'];
+        $training->pictures = $validated['pictures'];
 
         $training->save();
         $request->session()->flash('success', 'Enregister');
         return redirect()->route('admin.training.show', $training->id);
     }
 
-    /**
-     * DELETE FORMATION
-     */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request, int $id): Redirector|RedirectResponse
     {
-        $training = Training::find($id);
+        $training = new training();
+        $training::find($id);
         $training->delete();
         $request->session()->flash('success', 'la Formation ' . $id . ' a bien été supprimer avec succès');
         return redirect()->route('admin.training.index', $training->id);
