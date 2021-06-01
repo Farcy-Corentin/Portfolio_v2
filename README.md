@@ -1,18 +1,29 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 # Portfolio Laravel
-
-# Table of content:
 - [Portfolio Laravel](#portfolio-laravel)
-- [Table of content:](#table-of-content)
   - [Introduction](#introduction)
   - [Requirements](#requirements)
   - [Installation](#installation)
   - [Technologies](#technologies)
   - [Start](#start)
+  - [Functionality](#functionality)
+  - [Improvement](#improvement)
+  - [Contribute](#contribute)
+  - [Author](#author)
+- [LaraStan](#larastan)
 
 ## Introduction
-Création de mon portfolio sur Laravel
+Creating my portfolio on Laravel.
+I did some research on google, to be able to make my portfolio on laravel.
+
+So I started to build my portfolio with a PHP framework. I had some difficulties to design
+something from scratch. But it's a very good training for me. 
+
+**Why Laravel?
+I chose laravel for the simplest and best reason is that the documentation is particularly easy to understand, 
+neat and much more organized. The routing system is easy to set up.
+The structure of laravel is simple, easy to understand. But also the tutorials on laracasts.
 
 ## Requirements
 - [PHP](https://www.php.net/downloads)
