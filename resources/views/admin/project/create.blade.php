@@ -18,7 +18,7 @@
                 {{ Form::textarea('descriptions', null, ['class' => 'form-control']) }}
 
                 {{ Form::label('slug', 'slug:') }}
-                {{ Form::text('slug', null, ['class' => 'form-control', 'required' => '', 'minlength' => '5', 'maxlength' => '255']) }}
+                {{-- {{ Form::text('slug', null, ['class' => 'form-control', 'required' => '', 'minlength' => '5', 'maxlength' => '255']) }} --}}
 
                 {{ Form::label('started_at', 'Started_at:') }}
                 {{ Form::date('started_at', null, ['class' => 'form-control']) }}

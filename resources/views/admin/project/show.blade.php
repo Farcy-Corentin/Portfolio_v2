@@ -19,10 +19,9 @@
         <p>{{ $project->links }}</p>
         <p>{{ $project->github_links }}</p>
         <p>{{ $project->online }}</p>
-        {{-- fetch preview image(s) --}}
-        @foreach ($fileModals as $fileModal)
-            <li>{{ $fileModal->image_path }}</li>
-            <img src="{{ asset('storage/images/' . $photo->name )}}" alt="">
+        {{-- <img src='{{ asset("public/uploads/$project->image_path") }}'>{{ $project->name }}</img> --}}
+        @foreach($images as $gallery)
+            <img src="{{asset('uploads/'.$gallery->image_path)}}" alt="">
         @endforeach
         </div>
 

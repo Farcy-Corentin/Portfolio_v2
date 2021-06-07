@@ -1,19 +1,19 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use App\Models\Project;
 use Illuminate\Support\Str;
 use App\Models\ImageProject;
 use Illuminate\Http\Request;
 use App\Models\CategoryProject;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Collection;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Intervention\Image\Facades\Image;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class ProjectController extends Controller
 {
@@ -27,7 +27,8 @@ class ProjectController extends Controller
 
     {
         $projects = Project::OrderBy('id', 'desc')->paginate(10);
-        return view('admin.project.index', compact('projects'));
+        $images = ImageProject::all('image_path', 'id');
+        return view('admin.project.index', compact('projects', 'images'));
     }
 
     public function create(): Factory|View
@@ -44,7 +45,7 @@ class ProjectController extends Controller
             'title' => 'required|max:255',
             'descriptions' => 'required',
             'categoryproject' => 'required|exists:categoryproject,id',
-            'slug' => 'required|alpha_dash|min:5|max:255|unique:projects,slug',
+            // 'slug' => 'required|alpha_dash|min:5|max:255|unique:projects,slug',
             'started_at' =>  'required|date|date_format:Y-m-d',
             'finished_at' =>  'required|date|date_format:Y-m-d',
             'missions' => 'required',
@@ -60,7 +61,7 @@ class ProjectController extends Controller
         $project->title = $validated['title'];
         $project->descriptions = $validated['descriptions'];
         $project->categoryproject_id = (string) $validated['categoryproject'];
-        $project->slug = $validated['slug'];
+        $project->slug = Str::slug($project->title, '-');
         $project->started_at = $validated['started_at'];
         $project->finished_at = $validated['finished_at'];
         $project->missions = $validated['missions'];
@@ -69,7 +70,7 @@ class ProjectController extends Controller
         $project->links = $validated['links'];
         $project->github_links = $validated['github_links'];
         $project->online = (int) $request->has('online');
-
+            // dd($project);
         $project->save();
         $project->refresh();
         // upload image
@@ -90,9 +91,14 @@ class ProjectController extends Controller
         return redirect()->route('admin.project.show', $project->id);
     }
 
-    public function show(Project $project): View|Factory
+    public function show(Project $project, ImageProject $images): View|Factory
     {
-        return view('admin.project.show')->with('project', $project);
+        $images = ImageProject::find($project);
+        return view('admin.project.show')
+            ->with([
+                'project' => $project,
+                'images' => $images 
+            ]);
     }
 
     public function edit(int $id): View|Factory
