@@ -11,7 +11,8 @@
   - [Improvement](#improvement)
   - [Contribute](#contribute)
   - [Author](#author)
-- [LaraStan](#larastan)
+    - [LaraStan](#larastan)
+    - [bundlephobia cli](#bundlephobia-cli)
 
 ## Introduction
 Creating my portfolio on Laravel.
@@ -76,7 +77,7 @@ you are looking to make your first contribution, follow the steps below.
 **Duplessi Geoffrey**
 
 
-# LaraStan
+### LaraStan
 Larastan is a static analysis command-line tool by Nuno Maduro built on top of PHPStan and focuses on finding errors in your Laravel code before running it
 
 ```sh
@@ -93,3 +94,6 @@ parameters:
     # ignoreErrors:
     checkMissingIterableValueType: false
 ```
+
+### bundlephobia cli
+
