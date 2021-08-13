@@ -9,6 +9,7 @@ use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\ExperienceController;
 use App\Models\Project;
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -29,7 +30,6 @@ Route::get('/projects/{slug}', [ProjectController::class, 'showProject'])->where
 Route::get('/experiences', [ExperienceController::class, 'getExperience']);
 
 Route::get('/trainings', [TrainingController::class, 'getTraining']);
-
 Route::get('/contact', function () {
     return view('contact');
 });

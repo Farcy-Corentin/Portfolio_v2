@@ -1,5 +1,10 @@
 {
+    "name": "portfolio_v2",
+    "version": "0.0.1",
+    "description": "My portfolio with the laravel framework",
     "private": true,
+    "keywords": [],
+    "author": "Geoffrey DUPLESSI",
     "scripts": {
         "dev": "npm run development",
         "development": "mix",
@@ -8,7 +13,8 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "clear": "php artisan optimize:clear"
+        "clear": "php artisan optimize:clear",
+        "maj": "composer update"
     },
     "devDependencies": {
         "axios": "^0.21",
