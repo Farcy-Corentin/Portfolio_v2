@@ -16,12 +16,11 @@
         <p>{{ $project->missions }}</p>
         <p>{{ $project->languages }}</p>
         <p>{{ $project->software }}</p>
-        <p>{{ $project->links }}</p>
-        <p>{{ $project->github_links }}</p>
-        <p>{{ $project->online }}</p>
+        <a href="{{ $project->links }}"> Liens web </a>
+        <a href="{{ $project->github_links }}">Lien Github</a>
         {{-- <img src='{{ asset("public/uploads/$project->image_path") }}'>{{ $project->name }}</img> --}}
-        @foreach($images as $gallery)
-            <img src="{{asset('uploads/'.$gallery->image_path)}}" alt="">
+        @foreach($project->images as $gallery) 
+         <img src="{{ asset('uploads/'. $gallery->image_path)}}" class="w-100" alt="{{ $gallery->name }}">
         @endforeach
         </div>
 

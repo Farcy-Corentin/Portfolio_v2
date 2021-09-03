@@ -43,10 +43,7 @@
 
                 {{ Form::label('online', 'online:') }}
                 {{ Form::checkbox('online', 0, false) }}
-
-                <img id="image_preview_container" src="{{ asset('public/image/uploads/image-preview.png') }}"
-                alt="preview image" style="max-height: 150px;">
-  
+                
                 <div class="form-group">
                     <input type="file" name="imageFile[]" multiple class="form-control" accept="image/*">
                     @if ($errors->has('files'))

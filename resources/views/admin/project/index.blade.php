@@ -4,7 +4,7 @@
 @section('content') 
     <div class="row">
         <div class="col-md-10">
-            All Projects
+            All Projects {{ $countProject }}
         </div>
 
         <div class="col-md-6 mb-5">

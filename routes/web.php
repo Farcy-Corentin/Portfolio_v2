@@ -7,7 +7,9 @@ use App\Http\Controllers\SkillController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\ExperienceController;
+use App\Http\Controllers\HomeController;
 use App\Models\Project;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,9 +31,9 @@ Route::get('/projects/{slug}', [ProjectController::class, 'showProject'])->where
 Route::get('/experiences', [ExperienceController::class, 'getExperience']);
 
 Route::get('/trainings', [TrainingController::class, 'getTraining']);
-
 Route::get('/contact', function () {
     return view('contact');
 });
-
+Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
+Route::get('/languageDemo', [HomeController::class, 'languageDemo']);
 Auth::routes();

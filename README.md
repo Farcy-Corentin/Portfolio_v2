@@ -11,7 +11,7 @@
   - [Improvement](#improvement)
   - [Contribute](#contribute)
   - [Author](#author)
-- [LaraStan](#larastan)
+    - [LaraStan](#larastan)
 
 ## Introduction
 Creating my portfolio on Laravel.
@@ -59,10 +59,6 @@ Starting Laravel development server: http://127.0.0.1:8000
 [Thu Apr 15 21:30:12 2021] PHP 8.0.0 Development Server (http://127.0.0.1:8000) started
 ```
 
-## Functionality
-```in progress```
-## Improvement
-```in progress```
 ## Contribute
 It's hard. It's always hard the first time you do something. Especially when you are collaborating, making mistakes
 isn't a comfortable thing. We wanted to simplify the way new open-source contributors learn & contribute for the first
@@ -76,20 +72,3 @@ you are looking to make your first contribution, follow the steps below.
 **Duplessi Geoffrey**
 
 
-# LaraStan
-Larastan is a static analysis command-line tool by Nuno Maduro built on top of PHPStan and focuses on finding errors in your Laravel code before running it
-
-```sh
-create file ./phpstan.neon.dist
-```
-```yml
-includes:
-    - ./vendor/nunomaduro/larastan/extension.neon
-
-parameters:
-    paths: 
-        - app
-    level: 8
-    # ignoreErrors:
-    checkMissingIterableValueType: false
-```

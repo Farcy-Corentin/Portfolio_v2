@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\CategoryProject;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
@@ -24,18 +25,19 @@ class ProjectController extends Controller
     }
     
     public function index(): View|Factory
-
     {
         $projects = Project::OrderBy('id', 'desc')->paginate(10);
         $images = ImageProject::all('image_path', 'id');
-        return view('admin.project.index', compact('projects', 'images'));
+        $countProject = DB::table('projects')->count();
+        
+        return view('admin.project.index', compact('projects', 'images', 'countProject' ));
     }
 
     public function create(): Factory|View
     {
         return view('admin.project.create', [
             'categoriesProject' => $this->selectCategoriesProject(),
-             'imageproject' => ImageProject::class
+            'imageproject' => ImageProject::class
         ]);
     }
 
@@ -70,16 +72,14 @@ class ProjectController extends Controller
         $project->links = $validated['links'];
         $project->github_links = $validated['github_links'];
         $project->online = (int) $request->has('online');
-            // dd($project);
         $project->save();
         $project->refresh();
         // upload image
         foreach($validated['imageFile'] as $file)
         {
             $random = Str::random();
-            $filename = "{$project->id}-{$random}";
+            $filename = "{$project->id}-{$random}.{$file->getClientOriginalExtension()}";
             $file->move(public_path().'/uploads/', $filename);
-
             $fileModal = new ImageProject();
             $fileModal->project_id = $project->id;
             $fileModal->name = $file->getClientOriginalName();
@@ -187,5 +187,10 @@ class ProjectController extends Controller
     public function selectCategoriesProject(): Collection
     {
         return CategoryProject::all()->pluck('title', 'id');
+    }
+
+    public function countProject()
+    {
+      
     }
 }

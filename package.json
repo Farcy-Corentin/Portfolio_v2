@@ -1,5 +1,10 @@
 {
+    "name": "portfolio_v2",
+    "version": "1.0.0",
+    "description": "My portfolio with the laravel framework",
     "private": true,
+    "keywords": [],
+    "author": "Geoffrey DUPLESSI",
     "scripts": {
         "dev": "npm run development",
         "development": "mix",
@@ -8,7 +13,8 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "clear": "php artisan optimize:clear"
+        "clear": "php artisan optimize:clear",
+        "maj": "composer update && npm outdated"
     },
     "devDependencies": {
         "axios": "^0.21",
@@ -24,5 +30,8 @@
         "vue": "^2.6.12",
         "vue-loader": "^15.9.6",
         "vue-template-compiler": "^2.6.12"
+    },
+    "dependencies": {
+        "flag-icon-css": "^3.5.0"
     }
 }
