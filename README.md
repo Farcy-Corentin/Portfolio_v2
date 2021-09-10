@@ -7,11 +7,8 @@
   - [Installation](#installation)
   - [Technologies](#technologies)
   - [Start](#start)
-  - [Functionality](#functionality)
-  - [Improvement](#improvement)
   - [Contribute](#contribute)
   - [Author](#author)
-    - [LaraStan](#larastan)
 
 ## Introduction
 Creating my portfolio on Laravel.
