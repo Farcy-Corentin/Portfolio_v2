@@ -65,11 +65,11 @@ Reading articles & watching tutorials can help, but what's better than actually 
 environment? This project aims at providing guidance & simplifying the way beginners make their first contribution. If
 you are looking to make your first contribution, follow the steps below.
 
-[Code of conduct](https://github.com/Grezor/Portfolio_v2/blob/master/CODE_OF_CONDUCT.md)
-[Contributing](https://github.com/Grezor/Portfolio_v2/blob/master/CONTRIBUTING.md)
-[Issue templates](https://github.com/Grezor/Portfolio_v2/blob/master/ISSUE_TEMPLATE.md)
-[Pull request template](https://github.com/Grezor/Portfolio_v2/blob/master/PULL_REQUEST_TEMPLATE.md)
-[Licence](https://github.com/Grezor/Portfolio_v2/blob/master/LICENSE)
+- [Code of conduct](https://github.com/Grezor/Portfolio_v2/blob/master/CODE_OF_CONDUCT.md)
+- [Contributing](https://github.com/Grezor/Portfolio_v2/blob/master/CONTRIBUTING.md)
+- [Issue templates](https://github.com/Grezor/Portfolio_v2/blob/master/ISSUE_TEMPLATE.md)
+- [Pull request template](https://github.com/Grezor/Portfolio_v2/blob/master/PULL_REQUEST_TEMPLATE.md)
+- [Licence](https://github.com/Grezor/Portfolio_v2/blob/master/LICENSE)
 
 
 ## Author
