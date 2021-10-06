@@ -19,7 +19,7 @@ class CreateExperiencesTable extends Migration
             $table->text('descriptions');
             $table->dateTime('started_at');
             $table->dateTime('finished_at')->nullable();
-            $table->string('missions');
+            $table->text('missions');
             $table->string('languages');
             $table->string('pictures');
             $table->string('links');

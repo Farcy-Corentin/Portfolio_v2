@@ -12,8 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $descriptions
  * @property DateTime $started_at
  * @property DateTime $finished_at
- * @property string $missions
- * @property string $languages
+ * @property text $missions
  * @property string $pictures
  * @property string $links
  * @property DateTime $created_at

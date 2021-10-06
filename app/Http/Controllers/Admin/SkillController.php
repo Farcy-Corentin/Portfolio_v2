@@ -11,6 +11,7 @@ use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\Factory;
+use App\Http\Requests\SkillStoreFormRequest;
 
 class SkillController extends Controller
 {
@@ -29,9 +30,17 @@ class SkillController extends Controller
 
     public function create(): Factory|View
     {
-        return view('admin.skill.create', [
-            'categories' => $this->selectCategorie()
-        ]);
+        $categoriesSkill = Category::all();
+        return view('admin.skill.create', compact('categoriesSkill'));
+    }
+
+    public function store(SkillStoreFormRequest $request): Redirector|RedirectResponse
+    {
+        $skill = $this->storeSkill($request->all());
+        $skill->save();
+        return redirect()
+            ->route('admin.skill.show', $skill->id)
+            ->with(['success' => 'Création de l\'article']);
     }
 
     public function edit(int $id): View|Factory
@@ -86,11 +95,14 @@ class SkillController extends Controller
         return redirect()->route('admin.skill.index', $skill->id);
     }
 
-    /**
-     * Selectionne toutes les catégories
-     */
-    private function selectCategorie(): Collection
+    private function storeSkill(array $skillData, Skill $skill = null): Skill
     {
-        return Category::all()->pluck('name', 'id');
+        $skill ??= new Skill();
+        $skill->name = $skillData['name'];
+        $skill->category_id = $skillData['category_id'];
+        $skill->skills = $skillData['skills'];
+        $skill->save();
+
+        return $skill;
     }
 }

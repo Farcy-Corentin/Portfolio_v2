@@ -21,8 +21,8 @@
         {{ Form::label('finished_at', 'Finished_at :', ["class" => "form-spaceing-top, font-weight-bold" ]) }}
         {{ Form::datetime('finished_at', null, ["class" => 'form-control']) }}
 
-        {{ Form::label('finished_at', 'Finished_at :', ["class" => "form-spaceing-top, font-weight-bold" ]) }}
-        {{ Form::text('missions', null, ["class" => 'form-control']) }}
+        {{ Form::label('missions', 'missions :', ["class" => "form-spaceing-top, font-weight-bold" ]) }}
+        {{ Form::textarea('missions', null, ["class" => 'form-control']) }}
 
         {{ Form::label('Languages', 'Languages :', ["class" => "form-spaceing-top, font-weight-bold" ]) }}
         {{ Form::text('languages', null, ["class" => 'form-control']) }}

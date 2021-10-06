@@ -15,7 +15,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/skills', [SkillController::class, 'getSkill']);
+Route::get('/skills', [SkillController::class, 'index']);
 
 // Route::get('/trainings', function () {
 //     return view('trainings');

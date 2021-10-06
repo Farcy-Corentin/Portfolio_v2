@@ -10,9 +10,11 @@ use Illuminate\Contracts\View\Factory;
 
 class SkillController extends Controller
 {
-    public function getSkill(): View|Factory
+    public function index(): View|Factory
     {
         $skills = Skill::all();
-        return view('skills', compact('skills'));
+        $categories = Category::all();
+        return view('skills', compact('skills', 'categories'));
     }
+
 }

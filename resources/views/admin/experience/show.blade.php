@@ -10,7 +10,7 @@
         <div class="col-md-8">
     
         <p>{{ $experience->title }}</p>
-        <p>{{ $experience->description }}</p>
+        <p>{{ $experience->descriptions }}</p>
         <p>{{ $experience->started_at }}</p>
         <p>{{ $experience->finished_at }}</p>
         <p>{{ $experience->missions }}</p>

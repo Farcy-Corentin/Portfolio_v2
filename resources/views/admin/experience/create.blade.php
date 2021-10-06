@@ -21,7 +21,7 @@
                 {{ Form::date('finished_at', null, ['class' => 'form-control']) }}
 
                 {{ Form::label('missions', 'Missions:') }}
-                {{ Form::text('missions', null, ['class' => 'form-control']) }}
+                {{ Form::textarea('missions', null, ['class' => 'form-control']) }}
 
                 {{ Form::label('languages', 'Languages:') }}
                 {{ Form::text('languages', null, ['class' => 'form-control']) }}

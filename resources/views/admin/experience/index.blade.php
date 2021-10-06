@@ -30,10 +30,15 @@
                         <th>{{ $experience->id }}</th>
                         <th>{{ $experience->title }}</th>
                         <th>{{ substr($experience->descriptions, 0, 50 ) }}</th>
+                        <th>{{ $experience->missions }}</th>
                         <th>{{ $experience->created_at }}</th>
                         <th>
                             <a href="{{ route('admin.experience.show', $experience->id) }}" class="btn btn-outline-primary">View</a>
-                            <a href="{{ route('admin.experience.edit', $experience->id) }}" class="btn btn-outline-danger">edit</a></th>
+                            <a href="{{ route('admin.experience.edit', $experience->id) }}" class="btn btn-outline-danger">edit</a>
+                            {!! Form::open(['route' => ['admin.experience.destroy', $experience->id], 'method' => 'DELETE']) !!}
+                            {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block']) !!}
+                            {!! Form::close() !!}
+                        </th>
                         </tr>
                     @endforeach
                  </tbody>
