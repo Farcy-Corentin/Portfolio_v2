@@ -87,13 +87,17 @@
                 <div class="form-group row my-4">
                     <div class="col-md-12">
                         <label for="pictures">pictures :</label>
-                        <input id="pictures" type="text" class="form-control @error('pictures') is-invalid @enderror"
-                            name="pictures" value="{{ old('pictures') }}" autofocus>
-                        @error('pictures')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
+                        <div class="form-group">
+                            <input id="pictures" type="file"
+                                           class="form-control @error('pictures') is-invalid @enderror"
+                                           name="pictures"
+                                           value="{{ old('pictures') }}" autofocus>
+                            @error('pictures')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
                     </div>
                 </div>
 

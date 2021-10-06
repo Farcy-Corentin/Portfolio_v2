@@ -16,11 +16,11 @@ class ExperienceStoreFormRequest extends FormRequest {
         return [
             'title' => 'required', 'string',
             'descriptions' => 'required','string',
-            'started_at' => 'required', 'date',
-            'finished_at' => 'required', 'date',
+            'started_at' => 'required|date|date_format:Y-m-d',
+            'finished_at' => 'required|date|date_format:Y-m-d',
             'missions' => 'required', 'string',
             'languages' => 'required', 'string',
-            'pictures' => 'required', 'string',
+            'pictures' => 'required', 'file',
             'links' => 'required', 'string',
         ];
     }

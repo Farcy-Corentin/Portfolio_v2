@@ -4,16 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Experience;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ExperienceStoreFormRequest;
 use Illuminate\View\View;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
-use Illuminate\Routing\Route;
-use Illuminate\Support\Facades\Redirect;
-use PhpParser\Node\Expr\New_;
 
 class ExperienceController extends Controller
 {
@@ -37,6 +34,12 @@ class ExperienceController extends Controller
     public function store(ExperienceStoreFormRequest $request): Redirector|RedirectResponse
     {
         $experience = $this->storeExperience($request->all());
+        // uploads files
+        $file = $request->file('pictures');
+        $filename = Str::uuid() . '.' . $file->extension();
+        $file->move(public_path().'/uploads/experience/', $filename);
+        $experience->pictures = $filename;
+
         $experience->save();
         return redirect()
                 ->route('admin.experience.show', $experience->id)
@@ -78,6 +81,7 @@ class ExperienceController extends Controller
         $experience->links = $validated['links'];
 
         $experience->save();
+
         $request->session()->flash('success', 'Enregister');
         return redirect()->route('admin.experience.show', $experience->id);
     }
@@ -104,7 +108,7 @@ class ExperienceController extends Controller
         $experience->pictures = $experienceData['pictures'];
         $experience->links = $experienceData['links'];
         $experience->save();
-        
+
         return $experience;
     }
 }
