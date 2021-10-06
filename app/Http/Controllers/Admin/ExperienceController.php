@@ -6,6 +6,7 @@ use App\Models\Experience;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ExperienceStoreFormRequest;
 use Illuminate\View\View;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -33,32 +34,13 @@ class ExperienceController extends Controller
         return view('admin.experience.index', compact('experiences'));
     }
 
-    public function store(Request $request): Redirector|RedirectResponse
+    public function store(ExperienceStoreFormRequest $request): Redirector|RedirectResponse
     {
-        $validated = $this->validate($request, [
-            'title' => 'required',
-            'descriptions' => 'required',
-            'started_at' => 'required',
-            'finished_at' => 'required',
-            'missions' => 'required',
-            'languages' => 'required',
-            'pictures' => 'required',
-            'links' => 'required'
-        ]);
-
-        $experience = new Experience();
-        $experience->title = $validated['title'];
-        $experience->descriptions = $validated['descriptions'];
-        $experience->started_at = $validated['started_at'];
-        $experience->finished_at = $validated['finished_at'];
-        $experience->missions = $validated['missions'];
-        $experience->languages = $validated['languages'];
-        $experience->pictures = $validated['pictures'];
-        $experience->links = $validated['links'];
-
+        $experience = $this->storeExperience($request->all());
         $experience->save();
-        $request->session()->flash('success', 'Enregister');
-        return redirect()->route('admin.experience.show', $experience->id);
+        return redirect()
+                ->route('admin.experience.show', $experience->id)
+                ->with(['success' => 'Création de L\'ex^périence']);
     }
 
     public function show(Experience $experience): View
@@ -108,5 +90,21 @@ class ExperienceController extends Controller
         $experience->delete();
         $request->session()->flash('success', 'l\'expériences ' . $id . 'a bien été supprimer avec succès');
         return redirect()->route('admin.experience.index', $experience->id);
+    }
+
+    private function storeExperience(array $experienceData, Experience $experience = null): Experience
+    {
+        $experience ??= new Experience();
+        $experience->title = $experienceData['title'];
+        $experience->descriptions = $experienceData['descriptions'];
+        $experience->started_at = $experienceData['started_at'];
+        $experience->finished_at = $experienceData['finished_at'];
+        $experience->missions = $experienceData['missions'];
+        $experience->languages = $experienceData['languages'];
+        $experience->pictures = $experienceData['pictures'];
+        $experience->links = $experienceData['links'];
+        $experience->save();
+        
+        return $experience;
     }
 }

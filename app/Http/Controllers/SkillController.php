@@ -16,5 +16,4 @@ class SkillController extends Controller
         $categories = Category::all();
         return view('skills', compact('skills', 'categories'));
     }
-
 }
