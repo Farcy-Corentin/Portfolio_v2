@@ -8,7 +8,7 @@
         <p>{{ $experience->finished_at }}</p>
         <p>{{ $experience->missions }}</p>
         <p>{{ $experience->languages }}</p>
-        <img src="{{ $experience->pictures }}" alt="{{ $experience->title }}">
+        <img src="{{ asset('storage/uploads/experience/'. $experience->pictures) }}" alt="{{ $experience->title }}">
         <p>{{ $experience->links }}</p>
     @endforeach
 @endsection

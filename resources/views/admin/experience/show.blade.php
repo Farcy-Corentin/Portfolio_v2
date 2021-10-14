@@ -15,9 +15,11 @@
         <p>{{ $experience->finished_at }}</p>
         <p>{{ $experience->missions }}</p>
         <p>{{ $experience->languages }}</p>
-        <p>{{ $experience->pictures }}</p>
         <p>{{ $experience->links }}</p>
-
+        <div class="image-container row mb-2">
+            <img src="{{ asset('uploads/experience/'.$experience->pictures) }}" class="w-50 h-auto pb-1" 
+                title="{{ $experience->title }}">
+        </div>
         </div>
 
         <div class="col-md-4">

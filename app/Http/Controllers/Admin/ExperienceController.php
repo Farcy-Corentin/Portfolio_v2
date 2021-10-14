@@ -7,10 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ExperienceStoreFormRequest;
+use Illuminate\Support\Facades\File;
 use Illuminate\View\View;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\File as FacadesFile;
+use Illuminate\Support\Facades\Storage;
+
 
 class ExperienceController extends Controller
 {
@@ -57,31 +61,22 @@ class ExperienceController extends Controller
         return view('admin.experience.edit')->with('experience', $experience);
     }
 
-    public function update(Request $request): Redirector|RedirectResponse
+    public function update(ExperienceStoreFormRequest $request, Experience $experience): Redirector|RedirectResponse
     {
-         $validated = $this->validate($request, [
-            'title' => 'required',
-            'descriptions' => 'required',
-            'started_at' => 'required',
-            'finished_at' => 'required',
-            'missions' => 'required',
-            'languages' => 'required',
-            'pictures' => 'required',
-            'links' => 'required'
-        ]);
+        $filepath = storage_path('app/public/uploads/experience/' . $experience->pictures);
+        if (file_exists($filepath)) {
+            unlink($filepath);
+        }
 
-        $experience = new Experience();
-        $experience->title =  $validated['title'];
-        $experience->descriptions = $validated['descriptions'];
-        $experience->started_at = $validated['started_at'];
-        $experience->finished_at =  $validated['finished_at'];
-        $experience->missions =$validated['missions'];
-        $experience->languages = $validated['languages'];
-        $experience->pictures = $validated['pictures'];
-        $experience->links = $validated['links'];
+        $this->storeExperience($request->all(), $experience);
 
+        $file = $request->file('pictures');
+        $filename = Str::uuid() . '-' . $file->extension();
+        $file->storeAs('uploads/experience', $filename ,'public');
+
+        $experience->pictures = $filename;
         $experience->save();
-
+        
         $request->session()->flash('success', 'Enregister');
         return redirect()->route('admin.experience.show', $experience->id);
     }
